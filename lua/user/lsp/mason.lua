@@ -1,4 +1,5 @@
 local servers = {
+  "sumneko_lua",
   "rust_analyzer",
 }
 
@@ -21,19 +22,6 @@ require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
 
-local settings = {
-	ui = {
-		border = "none",
-		icons = {
-			package_installed = "◍",
-			package_pending = "◍",
-			package_uninstalled = "◍",
-		},
-	},
-	log_level = vim.log.levels.INFO,
-	max_concurrent_installers = 4,
-}
-
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
 	return
@@ -49,6 +37,7 @@ for _, server in pairs(servers) do
 
 	server = vim.split(server, "@")[1]
 
+  -- Custom settings for some clients
 	local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
 	if require_ok then
 		opts = vim.tbl_deep_extend("force", conf_opts, opts)

@@ -43,6 +43,12 @@ if not cmp_status_ok then
   return
 end
 
+local has_words_before = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
+
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -69,7 +75,7 @@ cmp.setup {
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       elseif has_words_before() then
-        cmp.complete()
+        fallback()
       else
         fallback()
       end
