@@ -1,5 +1,6 @@
 local o = vim.opt
 
+o.fileencoding = "utf-8"
 o.number = true
 o.relativenumber = true
 o.cursorline = false
