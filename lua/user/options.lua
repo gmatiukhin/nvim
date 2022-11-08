@@ -16,3 +16,5 @@ o.updatetime = 300
 o.tabstop = 2
 o.shiftwidth = 2
 o.expandtab = true
+
+vim.cmd "let g:python3_host_prog = '/usr/bin/python3'"

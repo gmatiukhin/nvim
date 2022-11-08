@@ -1,6 +1,5 @@
 local fn = vim.fn
 
-
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -39,6 +38,7 @@ packer.init {
 
 -- Place to specify plugins
 return packer.startup(function(use)
+  use "folke/which-key.nvim"
 	use "wbthomason/packer.nvim" -- Packer manages itself
 	use "nvim-lua/plenary.nvim" -- Collecton of common lua functions, used by many plugins
 	use "nvim-lua/popup.nvim" -- Implementation of the Popup API from Vim
@@ -73,6 +73,8 @@ return packer.startup(function(use)
   }
   use "p00f/nvim-ts-rainbow"
   use "nvim-treesitter/playground"
+
+  use "windwp/nvim-autopairs"
 
 	-- Automatically set up config aufter cloning packer.nvim
 	if PACKER_BOOTSTRAP then

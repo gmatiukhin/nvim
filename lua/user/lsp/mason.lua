@@ -1,6 +1,8 @@
 local servers = {
   "sumneko_lua",
   "rust_analyzer",
+  "clangd",
+  "pyright",
 }
 
 local settings = {
