@@ -22,4 +22,8 @@ configs.setup {
     enable = true,
     disable = { "" },
   },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  }
 }
