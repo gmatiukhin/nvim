@@ -78,6 +78,12 @@ return packer.startup(function(use)
 
   use "windwp/nvim-autopairs"
 
+  use "lewis6991/gitsigns.nvim"
+
+  -- Ntim Tree
+  use "nvim-tree/nvim-tree.lua"
+  use "nvim-tree/nvim-web-devicons"
+
 	-- Automatically set up config aufter cloning packer.nvim
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

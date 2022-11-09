@@ -33,9 +33,8 @@ keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
--- Netrw Directory Listing on the left
--- We will hijack it later to use `NvimTree`
-keymap("n", "<leader>e", ":Lex 30<cr>", opts)
+-- Nvimtree
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Insert --
 -- Press `jj` fast to exit to normal mode
