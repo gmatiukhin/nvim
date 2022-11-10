@@ -84,6 +84,11 @@ return packer.startup(function(use)
   use "nvim-tree/nvim-tree.lua"
   use "nvim-tree/nvim-web-devicons"
 
+  -- Tabs, buffers, winbars and statusline
+  use "akinsho/bufferline.nvim"
+  use "moll/vim-bbye"
+  use "feline-nvim/feline.nvim"
+
 	-- Automatically set up config aufter cloning packer.nvim
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

@@ -82,3 +82,6 @@ keymap("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(v
 keymap("n", "<C-gi>", "<cmd>Gitsigns preview_hunk<CR>", opts)
 -- keymap("n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", opts)
 -- keymap("n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", opts)
+
+-- Buffers
+keymap("n", "<leader>x", "<cmd>:Bdelete<CR>", opts)
