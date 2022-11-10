@@ -4,13 +4,25 @@ if not status_ok then
   return
 end
 
+-- Disable background highlight for Triangles
+vim.api.nvim_exec(
+  [[
+    augroup transparent_signs
+      autocmd!
+      autocmd BufEnter * highlight DiffDelete guibg=NONE
+      autocmd BufEnter * highlight DiffChangeDelete guibg=NONE
+    augroup END
+  ]],
+  false
+)
+
 gitsigns.setup {
   signs = {
     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-    delete = { hl = "DiffDelete", text = "_", numhl = "GitSignsDeleteNr" },
-    topdelete = { hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr" },
-    changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr" },
+    delete = { hl = "DiffDelete", text = "", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteNr" },
+    topdelete = { hl = "DiffDelete", text = "", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteNr" },
+    changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeNr" },
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`

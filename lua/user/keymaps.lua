@@ -77,3 +77,8 @@ keymap("n", "<C-t>", ":Telescope live_grep<cr>", opts)
 -- Comment
 keymap("n", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
 keymap("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
+
+-- Gitsigns
+keymap("n", "<C-gi>", "<cmd>Gitsigns preview_hunk<CR>", opts)
+-- keymap("n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", opts)
+-- keymap("n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", opts)
