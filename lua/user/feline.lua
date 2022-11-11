@@ -2,6 +2,8 @@ local status_ok, feline = pcall(require, "feline")
 if not status_ok then
   return
 end
+-- "┃", "█", "", "", "", "", "", "", "●", ""
+-- " "
 
 local one_monokai = {
 	fg = "#abb2bf",
@@ -28,11 +30,25 @@ local vi_mode_colors = {
 	COMMAND = "aqua",
 }
 
-local get_diag = function(severity)
-    local data = vim.diagnostic.get(0, severity)
-    local count = 0
-    for _ in pairs(data) do count = count + 1 end
-    return (count > 0) and " " .. count .. " " or ""
+local get_lsp_diag = function(severity)
+  local data = vim.diagnostic.get(0, severity)
+  local count = 0
+  for _ in pairs(data) do count = count + 1 end
+  return (count > 0) and " " .. count .. " " or ""
+end
+
+local get_git_data = function(hunk_type)
+  local data = require("gitsigns").get_hunks()
+  if data == nil then
+    return ""
+  end
+  local count = 0
+  for _, hunk in pairs(data) do
+    if hunk["type"] == hunk_type then
+      count = count + 1
+    end
+  end
+  return (count > 0) and " " .. count .. " " or ""
 end
 
 local vim_mode = {
@@ -43,16 +59,24 @@ local vim_mode = {
       -- padding = "center", -- Uncomment for extra padding.
     },
   },
+  icon = "",
   hl = function()
     return {
-      fg = require("feline.providers.vi_mode").get_mode_color(),
-      bg = "darkblue",
+      fg = "darkblue",
+      bg = require("feline.providers.vi_mode").get_mode_color(),
       style = "bold",
-      name = "NeovimModeHLColor",
     }
   end,
-  -- left_sep = "block",
-  right_sep = "right_filled",
+  left_sep = "block",
+  right_sep = function ()
+    return {
+      str = " ",
+      hl = {
+        fg = require("feline.providers.vi_mode").get_mode_color(),
+        bg = "darkblue",
+      }
+    }
+  end,
 }
 
 local fileinfo = {
@@ -62,51 +86,87 @@ local fileinfo = {
       type = "relative-short",
     },
   },
-  hl = function()
-    return {
-      fg = require("feline.providers.vi_mode").get_mode_color(),
-      style = "bold",
-    }
-  end,
-  left_sep = " ",
-  right_sep = "right_filled",
+  hl = {
+    fg = "white",
+    bg = "darkblue",
+  },
+  left_sep = "block",
+  right_sep = "block",
 }
 
 local git = {
   branch = {
     provider = "git_branch",
     hl = {
-      fg = "peanut",
+      fg = "darkblue",
+      bg = "peanut",
+      style = "bold",
     },
-    left_sep = "right",
-    right_sep = "right_filled",
+    left_sep = {
+      str = " ",
+      hl = {
+        fg = "peanut",
+        bg = "darkblue",
+      }
+    },
+    right_sep = {
+      str = " ",
+      hl = {
+        fg = "peanut",
+        bg = "aqua",
+      }
+    },
+    icon = " "
   },
   diffAdded = {
-    provider = "git_diff_added",
+    provider = function ()
+      return get_git_data("add")
+    end,
     hl = {
-      fg = "green",
-      bg = "darkblue",
+      fg = "darkblue",
+      bg = "aqua",
     },
-    left_sep = "block",
-    right_sep = "right_filled",
+    right_sep = {
+      str = " ",
+      hl = {
+        fg = "aqua",
+        bg = "red",
+      },
+      always_visible = true,
+    },
   },
   diffRemoved = {
-    provider = "git_diff_removed",
+    provider = function ()
+      return get_git_data("delete")
+    end,
     hl = {
-      fg = "red",
-      bg = "darkblue",
+      fg = "darkblue",
+      bg = "red",
     },
-    left_sep = "block",
-    right_sep = "right_filled",
+    right_sep = {
+      str = " ",
+      hl = {
+        fg = "red",
+        bg = "orange",
+      },
+      always_visible = true,
+    },
   },
   diffChanged = {
-    provider = "git_diff_changed",
+    provider = function ()
+      return get_git_data("change")
+    end,
     hl = {
-      fg = "fg",
-      bg = "darkblue",
+      fg = "darkblue",
+      bg = "orange",
     },
-    left_sep = "block",
-    right_sep = "right_filled",
+    right_sep = {
+      str = " ",
+      hl = {
+        fg = "orange",
+      },
+      always_visible = true,
+    },
   },
   -- Limits blank space if there are no previous symbols
   dummy = {
@@ -117,44 +177,44 @@ local git = {
 local diagnostic = {
   errors = {
     provider = function()
-      return get_diag({ severity = vim.diagnostic.severity.ERROR })
+      return get_lsp_diag({ severity = vim.diagnostic.severity.ERROR })
     end,
     hl = {
       fg = "darkblue",
       bg = "red",
     },
-    left_sep = { str = "left_filled", hl = { fg = "red" }, always_visible = true },
-    right_sep = { str = "left_filled", hl = { fg = "yellow", bg = "red" }, always_visible = true },
+    left_sep = { str = " ", hl = { fg = "red" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "yellow", bg = "red" }, always_visible = true },
   },
   warnings = {
     provider = function()
-      return get_diag({ severity = vim.diagnostic.severity.WARN })
+      return get_lsp_diag({ severity = vim.diagnostic.severity.WARN })
     end,
     hl = {
       fg = "darkblue",
       bg = "yellow",
     },
-    right_sep = { str = "left_filled", hl = { fg = "aqua", bg = "yellow" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "aqua", bg = "yellow" }, always_visible = true },
   },
   hints = {
     provider = function()
-      return get_diag({ severity = vim.diagnostic.severity.HINT })
+      return get_lsp_diag({ severity = vim.diagnostic.severity.HINT })
     end,
     hl = {
       fg = "darkblue",
       bg = "aqua",
     },
-    right_sep = { str = "left_filled", hl = { fg = "orange", bg = "aqua" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "orange", bg = "aqua" }, always_visible = true },
   },
   info = {
     provider = function()
-      return get_diag({ severity = vim.diagnostic.severity.INFO })
+      return get_lsp_diag({ severity = vim.diagnostic.severity.INFO })
     end,
     hl = {
       fg = "darkblue",
       bg = "orange",
     },
-    right_sep = { str = "left_filled", hl = { fg = "darkblue", bg = "orange" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "darkblue", bg = "orange" }, always_visible = true },
   },
 }
 
@@ -170,10 +230,12 @@ local file_type = {
 
 local position = {
   position = {
-    provider = function()
-      -- TODO: What about 4+ diget line numbers?
-      return string.format(" %3d:%-2d ", unpack(vim.api.nvim_win_get_cursor(0)))
-    end,
+    provider = {
+      name = "position",
+      opts = {
+        format = " {line}:{col} "
+      }
+    },
     hl = function()
       return {
         fg = "darkblue",
@@ -181,7 +243,7 @@ local position = {
       }
     end,
     left_sep = {
-      str = "left_filled",
+      str = " ",
       hl = function()
         return {
           fg = require("feline.providers.vi_mode").get_mode_color(),
@@ -201,7 +263,7 @@ local position = {
         }
       end,
     left_sep = {
-      str = "left",
+      str = " ",
       hl = function()
         return {
           fg = "darkblue",
