@@ -89,6 +89,9 @@ return packer.startup(function(use)
   use "moll/vim-bbye"
   use "feline-nvim/feline.nvim"
 
+  -- LaTeX
+  use "lervag/vimtex"
+
 	-- Automatically set up config aufter cloning packer.nvim
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

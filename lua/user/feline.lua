@@ -96,7 +96,13 @@ local fileinfo = {
 
 local git = {
   branch = {
-    provider = "git_branch",
+    provider = function ()
+      local branch_name_status_ok, git_status = pcall(vim.api.nvim_buf_get_var, 0, "gitsigns_status_dict")
+      if not branch_name_status_ok then
+        return "no branch"
+      end
+      return git_status["head"]
+    end,
     hl = {
       fg = "darkblue",
       bg = "peanut",
@@ -107,16 +113,16 @@ local git = {
       hl = {
         fg = "peanut",
         bg = "darkblue",
-      }
+      },
     },
     right_sep = {
       str = " ",
       hl = {
         fg = "peanut",
         bg = "aqua",
-      }
+      },
     },
-    icon = " "
+    icon = " ",
   },
   diffAdded = {
     provider = function ()
@@ -168,10 +174,10 @@ local git = {
       always_visible = true,
     },
   },
-  -- Limits blank space if there are no previous symbols
-  dummy = {
-    provider = "",
-  }
+  -- -- Limits blank space if there are no previous symbols
+  -- dummy = {
+  --   provider = "",
+  -- }
 }
 
 local diagnostic = {
