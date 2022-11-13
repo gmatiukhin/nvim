@@ -37,18 +37,27 @@ local get_lsp_diag = function(severity)
   return (count > 0) and " " .. count .. " " or ""
 end
 
-local get_git_data = function(hunk_type)
-  local data = require("gitsigns").get_hunks()
-  if data == nil then
+-- local git = function(hunk_type)
+--   local data = require("gitsigns").get_hunks()
+--   if data == nil then
+--     return ""
+--   end
+--   local count = 0
+--   for _, hunk in pairs(data) do
+--     if hunk["type"] == hunk_type then
+--       count = count + 1
+--     end
+--   end
+--   return (count > 0) and " " .. count .. " " or ""
+-- end
+
+local get_git_data = function(info)
+  local git_status_ok, git_status = pcall(vim.api.nvim_buf_get_var, 0, "gitsigns_status_dict")
+  if not git_status_ok then
     return ""
   end
-  local count = 0
-  for _, hunk in pairs(data) do
-    if hunk["type"] == hunk_type then
-      count = count + 1
-    end
-  end
-  return (count > 0) and " " .. count .. " " or ""
+    local git_info = git_status[info]
+  return (git_info ~= nil) and git_info or ""
 end
 
 local vim_mode = {
@@ -97,11 +106,8 @@ local fileinfo = {
 local git = {
   branch = {
     provider = function ()
-      local branch_name_status_ok, git_status = pcall(vim.api.nvim_buf_get_var, 0, "gitsigns_status_dict")
-      if not branch_name_status_ok then
-        return "no branch"
-      end
-      return git_status["head"]
+      local branch_name = get_git_data("head")
+      return (branch_name ~= "") and branch_name or "no branch"
     end,
     hl = {
       fg = "darkblue",
@@ -126,7 +132,7 @@ local git = {
   },
   diffAdded = {
     provider = function ()
-      return get_git_data("add")
+      return tostring(get_git_data("added"))
     end,
     hl = {
       fg = "darkblue",
@@ -143,7 +149,7 @@ local git = {
   },
   diffRemoved = {
     provider = function ()
-      return get_git_data("delete")
+      return tostring(get_git_data("removed"))
     end,
     hl = {
       fg = "darkblue",
@@ -160,7 +166,7 @@ local git = {
   },
   diffChanged = {
     provider = function ()
-      return get_git_data("change")
+      return tostring(get_git_data("changed"))
     end,
     hl = {
       fg = "darkblue",
@@ -287,7 +293,6 @@ local left = {
   git.diffAdded,
   git.diffRemoved,
   git.diffChanged,
-  git.dummy,
 }
 
 local right = {
