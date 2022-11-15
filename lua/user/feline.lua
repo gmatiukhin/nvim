@@ -6,59 +6,29 @@ end
 -- " "
 
 local one_monokai = {
-	fg = "#abb2bf",
-	bg = "#1e2024",
-	green = "#98c379",
-	yellow = "#e5c07b",
-	purple = "#c678dd",
-	orange = "#d19a66",
-	peanut = "#f6d5a4",
-	red = "#e06c75",
-	aqua = "#61afef",
-	darkblue = "#282c34",
-	dark_red = "#f75f5f",
+  fg = "#abb2bf",
+  bg = "#1e2024",
+  green = "#98c379",
+  yellow = "#e5c07b",
+  purple = "#c678dd",
+  orange = "#d19a66",
+  peanut = "#f6d5a4",
+  red = "#e06c75",
+  aqua = "#61afef",
+  darkblue = "#282c34",
+  dark_red = "#f75f5f",
 }
 
 local vi_mode_colors = {
-	NORMAL = "green",
-	OP = "green",
-	INSERT = "yellow",
-	VISUAL = "purple",
-	LINES = "orange",
-	BLOCK = "dark_red",
-	REPLACE = "red",
-	COMMAND = "aqua",
+  NORMAL = "green",
+  OP = "green",
+  INSERT = "yellow",
+  VISUAL = "purple",
+  LINES = "orange",
+  BLOCK = "dark_red",
+  REPLACE = "red",
+  COMMAND = "aqua",
 }
-
-local get_lsp_diag = function(severity)
-  local data = vim.diagnostic.get(0, severity)
-  local count = 0
-  for _ in pairs(data) do count = count + 1 end
-  return (count > 0) and " " .. count .. " " or ""
-end
-
--- local git = function(hunk_type)
---   local data = require("gitsigns").get_hunks()
---   if data == nil then
---     return ""
---   end
---   local count = 0
---   for _, hunk in pairs(data) do
---     if hunk["type"] == hunk_type then
---       count = count + 1
---     end
---   end
---   return (count > 0) and " " .. count .. " " or ""
--- end
-
-local get_git_data = function(info)
-  local git_status_ok, git_status = pcall(vim.api.nvim_buf_get_var, 0, "gitsigns_status_dict")
-  if not git_status_ok then
-    return ""
-  end
-    local git_info = git_status[info]
-  return (git_info ~= nil) and git_info or ""
-end
 
 local vim_mode = {
   provider = {
@@ -77,7 +47,7 @@ local vim_mode = {
     }
   end,
   left_sep = "block",
-  right_sep = function ()
+  right_sep = function()
     return {
       str = " ",
       hl = {
@@ -103,9 +73,18 @@ local fileinfo = {
   right_sep = "block",
 }
 
+local get_git_data = function(info)
+  local git_status_ok, git_status = pcall(vim.api.nvim_buf_get_var, 0, "gitsigns_status_dict")
+  if not git_status_ok then
+    return ""
+  end
+  local git_info = git_status[info]
+  return (git_info ~= nil and git_info ~= 0) and git_info or ""
+end
+
 local git = {
   branch = {
-    provider = function ()
+    provider = function()
       local branch_name = get_git_data("head")
       return (branch_name ~= "") and branch_name or "no branch"
     end,
@@ -131,7 +110,7 @@ local git = {
     icon = " ",
   },
   diffAdded = {
-    provider = function ()
+    provider = function()
       return tostring(get_git_data("added"))
     end,
     hl = {
@@ -148,7 +127,7 @@ local git = {
     },
   },
   diffRemoved = {
-    provider = function ()
+    provider = function()
       return tostring(get_git_data("removed"))
     end,
     hl = {
@@ -165,7 +144,7 @@ local git = {
     },
   },
   diffChanged = {
-    provider = function ()
+    provider = function()
       return tostring(get_git_data("changed"))
     end,
     hl = {
@@ -186,7 +165,14 @@ local git = {
   -- }
 }
 
-local diagnostic = {
+local get_lsp_diag = function(severity)
+  local data = vim.diagnostic.get(0, severity)
+  local count = 0
+  for _ in pairs(data) do count = count + 1 end
+  return (count > 0) and " " .. count .. " " or ""
+end
+
+local lsp = {
   errors = {
     provider = function()
       return get_lsp_diag({ severity = vim.diagnostic.severity.ERROR })
@@ -228,6 +214,32 @@ local diagnostic = {
     },
     right_sep = { str = " ", hl = { fg = "darkblue", bg = "orange" }, always_visible = true },
   },
+  message = {
+    provider = function()
+      if not rawget(vim, "lsp") then
+        return ""
+      end
+
+      local Lsp = vim.lsp.util.get_progress_messages()[1]
+      if vim.o.columns < 120 or not Lsp then
+        return ""
+      end
+
+      local msg = Lsp.message or ""
+      local percentage = Lsp.percentage or 0
+      local title = Lsp.title or ""
+      local spinners = { "", "" }
+      local ms = vim.loop.hrtime() / 1000000
+      local frame = math.floor(ms / 120) % #spinners
+      local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+
+      return (content) or ""
+    end,
+    hl = {
+      fg = "red",
+      -- bg = "darkblue",
+    }
+  },
 }
 
 local file_type = {
@@ -268,12 +280,12 @@ local position = {
     provider = function()
       return " " .. require("feline.providers.cursor").line_percentage() .. "  "
     end,
-      hl = function()
-        return {
-          fg = "darkblue",
-          bg = require("feline.providers.vi_mode").get_mode_color(),
-        }
-      end,
+    hl = function()
+      return {
+        fg = "darkblue",
+        bg = require("feline.providers.vi_mode").get_mode_color(),
+      }
+    end,
     left_sep = {
       str = " ",
       hl = function()
@@ -287,7 +299,7 @@ local position = {
 }
 
 local left = {
-	vim_mode,
+  vim_mode,
   fileinfo,
   git.branch,
   git.diffAdded,
@@ -295,29 +307,34 @@ local left = {
   git.diffChanged,
 }
 
+local middle = {
+  lsp.message,
+}
+
 local right = {
-	diagnostic.errors,
-	diagnostic.warnings,
-	diagnostic.hints,
-	diagnostic.info,
+  lsp.errors,
+  lsp.warnings,
+  lsp.hints,
+  lsp.info,
   file_type,
-	position.position,
-	position.line_percentage,
+  position.position,
+  position.line_percentage,
 }
 
 local components = {
-	active = {
-		left,
-		right,
-	},
-	inactive = {
-	},
+  active = {
+    left,
+    middle,
+    right,
+  },
+  inactive = {
+  },
 }
 
 feline.setup {
-	components = components,
-	theme = one_monokai,
-	vi_mode_colors = vi_mode_colors,
+  components = components,
+  theme = one_monokai,
+  vi_mode_colors = vi_mode_colors,
 }
 
 feline.winbar.setup()

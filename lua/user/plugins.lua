@@ -25,23 +25,23 @@ vim.cmd [[
 
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-	return
+  return
 end
 
 packer.init {
-	display = {
-		open_fn = function()
-			return require("packer.util").float { border = "rounded" }
-		end,
-	},
+  display = {
+    open_fn = function()
+      return require("packer.util").float { border = "rounded" }
+    end,
+  },
 }
 
 -- Place to specify plugins
 return packer.startup(function(use)
   use "folke/which-key.nvim"
-	use "wbthomason/packer.nvim" -- Packer manages itself
-	use "nvim-lua/plenary.nvim" -- Collecton of common lua functions, used by many plugins
-	use "nvim-lua/popup.nvim" -- Implementation of the Popup API from Vim
+  use "wbthomason/packer.nvim" -- Packer manages itself
+  use "nvim-lua/plenary.nvim" -- Collecton of common lua functions, used by many plugins
+  use "nvim-lua/popup.nvim" -- Implementation of the Popup API from Vim
 
   use "folke/tokyonight.nvim" -- Tokyonight colorscheme
 
@@ -92,8 +92,8 @@ return packer.startup(function(use)
   -- LaTeX
   use "lervag/vimtex"
 
-	-- Automatically set up config aufter cloning packer.nvim
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
+  -- Automatically set up config aufter cloning packer.nvim
+  if PACKER_BOOTSTRAP then
+    require("packer").sync()
+  end
 end)

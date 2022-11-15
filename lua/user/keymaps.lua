@@ -85,3 +85,11 @@ keymap("n", "<C-g>", "<cmd>Gitsigns preview_hunk<CR>", opts)
 
 -- Buffers
 keymap("n", "<leader>x", "<cmd>:Bdelete<CR>", opts)
+
+
+-- vim.api.nvim_buf_set_keymap(0, "i", "<Esc>", "<cmd>stopinsert | q!<CR>", opts)
+-- vim.api.nvim_buf_set_keymap(0, "n", "<Esc>", "<cmd>stopinsert | q!<CR>", opts)
+-- vim.api.nvim_buf_set_keymap(0, "i", "<CR>",
+--   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
+-- vim.api.nvim_buf_set_keymap(0, "n", "<CR>",
+--   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
