@@ -1,10 +1,10 @@
 local status_ok, autopairs = pcall(require, "nvim-autopairs")
 if not status_ok then
-  print "Could not find nvim-autopairs"
+  print("Could not find nvim-autopairs")
   return
 end
 
-autopairs.setup {
+autopairs.setup({
   check_ts = true,
   ts_config = {
     -- lua = { "string" }, -- no autopairs for lua in strings !!! does not work
@@ -27,13 +27,13 @@ autopairs.setup {
     highlight = "Search",
     highlight_grey = "Comment",
   },
-}
+})
 
 -- Integration with cmp
-local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
-  print "Could not find cmp"
+  print("Could not find cmp")
   return
 end
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))

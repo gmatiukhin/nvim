@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-bufferline.setup {
+bufferline.setup({
   options = {
     numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
     close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
@@ -40,8 +40,8 @@ bufferline.setup {
     diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
       local icon = level:match("error") and " " or " "
-        return " " .. icon .. count
-      end,
+      return " " .. icon .. count
+    end,
     diagnostics_update_in_insert = false,
     -- NOTE: this will be called a lot so don't do any heavy processing here
     -- custom_filter = function(buf_number)
@@ -174,4 +174,4 @@ bufferline.setup {
       bg = { attribute = "bg", highlight = "Normal" },
     },
   },
-}
+})

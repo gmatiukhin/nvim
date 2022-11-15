@@ -1,10 +1,10 @@
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
-  print "Could not fin Nvim Treesitter"
+  print("Could not fin Nvim Treesitter")
   return
 end
 
-configs.setup {
+configs.setup({
   ensure_installed = { "lua", "rust", "cpp", "python" },
   sync_installed = false,
   ignore_install = { "" },
@@ -25,5 +25,5 @@ configs.setup {
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
-  }
-}
+  },
+})

@@ -1,6 +1,6 @@
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
-  print "Could not find luasnip"
+  print("Could not find luasnip")
   return
 end
 
@@ -39,17 +39,16 @@ local kind_icons = {
 
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
-  print "Could not find cmp"
+  print("Could not find cmp")
   return
 end
 
 local has_words_before = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+  local col = vim.fn.col(".") - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
-
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -61,12 +60,12 @@ cmp.setup {
     ["<C-j>"] = cmp.mapping.select_next_item(),
 
     -- Docs scroll
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
     -- Pull up completion menu without typing
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
 
     -- Supertab-like mapping
     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -118,4 +117,4 @@ cmp.setup {
   window = {
     documentation = cmp.config.window.bordered(),
   },
-}
+})

@@ -53,7 +53,7 @@ local vim_mode = {
       hl = {
         fg = require("feline.providers.vi_mode").get_mode_color(),
         bg = "darkblue",
-      }
+      },
     }
   end,
 }
@@ -168,7 +168,9 @@ local git = {
 local get_lsp_diag = function(severity)
   local data = vim.diagnostic.get(0, severity)
   local count = 0
-  for _ in pairs(data) do count = count + 1 end
+  for _ in pairs(data) do
+    count = count + 1
+  end
   return (count > 0) and " " .. count .. " " or ""
 end
 
@@ -233,12 +235,12 @@ local lsp = {
       local frame = math.floor(ms / 120) % #spinners
       local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
 
-      return (content) or ""
+      return content or ""
     end,
     hl = {
       fg = "red",
       -- bg = "darkblue",
-    }
+    },
   },
 }
 
@@ -257,8 +259,8 @@ local position = {
     provider = {
       name = "position",
       opts = {
-        format = " {line}:{col} "
-      }
+        format = " {line}:{col} ",
+      },
     },
     hl = function()
       return {
@@ -327,14 +329,13 @@ local components = {
     middle,
     right,
   },
-  inactive = {
-  },
+  inactive = {},
 }
 
-feline.setup {
+feline.setup({
   components = components,
   theme = one_monokai,
   vi_mode_colors = vi_mode_colors,
-}
+})
 
 feline.winbar.setup()
