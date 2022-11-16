@@ -59,6 +59,8 @@ bufferline.setup({
     --     return true
     --   end
     -- end,
+    --
+    -- Moves buffer line start point to the right when nvim tree is opened
     offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
     show_buffer_icons = true,
     show_buffer_close_icons = true,
@@ -104,9 +106,9 @@ bufferline.setup({
       bg = { attribute = "bg", highlight = "TabLine" },
     },
     -- close_button_selected = {
-    --   fg = {attribute='fg',highlight='TabLineSel'},
-    --   bg ={attribute='bg',highlight='TabLineSel'}
-    --   },
+    --   fg = { attribute = "fg", highlight = "TabLineSel" },
+    --   bg = { attribute = "bg", highlight = "TabLineSel" },
+    -- },
 
     tab_selected = {
       fg = { attribute = "fg", highlight = "Normal" },

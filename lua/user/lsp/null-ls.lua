@@ -16,8 +16,10 @@ null_ls.setup({
     -- formatting.black.with({ extra_args = { "--fast" } }),
     formatting.stylua.with({
       extra_args = {
-        "--indent-type Spaces",
-        "--indent-width 2",
+        "--indent-type",
+        "Spaces",
+        "--indent-width",
+        "2",
       },
     }),
     formatting.rustfmt.with({
