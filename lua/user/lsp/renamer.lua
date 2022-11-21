@@ -4,7 +4,7 @@ M.open = function()
   local currName = vim.fn.expand("<cword>") .. " "
 
   local win = require("plenary.popup").create(currName, {
-    title = "Renamer",
+    title = "Rename",
     style = "minimal",
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     relative = "cursor",
@@ -29,7 +29,7 @@ M.open = function()
     0,
     "i",
     "<CR>",
-    "<cmd>stopinsert | lua require'user.renamer'.apply(" .. currName .. "," .. win .. ")<CR>",
+    "<cmd>stopinsert | lua require('user.lsp.renamer').apply(" .. currName .. "," .. win .. ")<CR>",
     map_opts
   )
 
@@ -37,7 +37,7 @@ M.open = function()
     0,
     "n",
     "<CR>",
-    "<cmd>stopinsert | lua require'user.renamer'.apply(" .. currName .. "," .. win .. ")<CR>",
+    "<cmd>stopinsert | lua require('user.lsp.renamer').apply(" .. currName .. "," .. win .. ")<CR>",
     map_opts
   )
 end

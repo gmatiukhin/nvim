@@ -25,7 +25,12 @@ null_ls.setup({
     formatting.rustfmt.with({
       extra_args = { "--edition=2021" },
     }),
-    -- diagnostics.flake8
+    -- diagnostics.flake8.with({
+    --   "--max-line-length",
+    --   "160",
+    -- }),
+    formatting.black,
+    formatting.latexindent,
   },
   -- formatting on save
   on_attach = function(client, bufnr)
@@ -35,7 +40,6 @@ null_ls.setup({
         group = augroup,
         buffer = bufnr,
         callback = function()
-          -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
           vim.lsp.buf.format()
         end,
       })
