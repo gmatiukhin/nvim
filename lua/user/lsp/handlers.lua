@@ -77,6 +77,21 @@ local function lsp_keymaps(bufnr)
   vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
+-- formatting on save
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local format_on_save = function(client, bufnr)
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+  end
+end
+
 -- Customize particular server
 M.on_attach = function(client, bufnr)
   -- Here some custom capabilities could be specified
@@ -85,6 +100,7 @@ M.on_attach = function(client, bufnr)
   -- end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
+  format_on_save(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
