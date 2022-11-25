@@ -51,6 +51,10 @@ return packer.startup(function(use)
   use("williamboman/mason-lspconfig.nvim")
   use("jose-elias-alvarez/null-ls.nvim")
 
+  -- Diagnostic
+  use("folke/trouble.nvim")
+  use("folke/todo-comments.nvim")
+
   -- cmp plugins
   use("hrsh7th/nvim-cmp") -- The completion plugin
   use("hrsh7th/cmp-buffer") -- buffer completions

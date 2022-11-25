@@ -7,7 +7,6 @@ local keymap = vim.api.nvim_set_keymap
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -15,6 +14,14 @@ vim.g.maplocalleader = " "
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+--
+
+-- Insert --
+-- Better navigation
+keymap("i", "<A-h>", "<Left>", opts)
+keymap("i", "<A-j>", "<Down>", opts)
+keymap("i", "<A-k>", "<Up>", opts)
+keymap("i", "<A-l>", "<Right>", opts)
 
 -- Normal --
 -- Better window navigation
@@ -92,3 +99,7 @@ keymap("n", "<leader>x", "<cmd>:Bdelete<CR>", opts)
 --   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
 -- vim.api.nvim_buf_set_keymap(0, "n", "<CR>",
 --   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
+
+-- Trouble
+keymap("n", "T", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts)
+keymap("n", "Z", "<cmd>TroubleToggle todo<CR>", opts)

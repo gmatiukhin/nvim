@@ -223,7 +223,7 @@ local lsp = {
       end
 
       local Lsp = vim.lsp.util.get_progress_messages()[1]
-      if vim.o.columns < 120 or not Lsp then
+      if not Lsp then
         return ""
       end
 
@@ -233,7 +233,13 @@ local lsp = {
       local spinners = { "", "" }
       local ms = vim.loop.hrtime() / 1000000
       local frame = math.floor(ms / 120) % #spinners
-      local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+
+      local content = ""
+      if vim.o.columns < 120 then
+        content = string.format(" %%<%s", spinners[frame + 1])
+      else
+        content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+      end
 
       return content or ""
     end,
