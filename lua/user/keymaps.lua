@@ -5,6 +5,7 @@ local term_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 keymap("", "<Space>", "<Nop>", opts)
+keymap("", "q:", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 -- Modes
