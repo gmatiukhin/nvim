@@ -106,4 +106,4 @@ keymap("n", "<leader>x", "<cmd>:Bdelete<CR>", opts)
 
 -- Trouble
 keymap("n", "T", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts)
-keymap("n", "Z", "<cmd>TroubleToggle todo<CR>", opts)
+keymap("n", "F", "<cmd>TroubleToggle todo<CR>", opts)

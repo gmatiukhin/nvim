@@ -14,33 +14,34 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 nvim_tree.setup({
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = false,
+  open_on_setup = true,
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
     "alpha",
   },
   create_in_closed_folder = true,
-  open_on_tab = false,
-  hijack_cursor = false,
+  hijack_unnamed_buffer_when_opening = true,
+  hijack_cursor = true,
   sync_root_with_cwd = false,
   hijack_directories = {
     enable = true,
     auto_open = true,
   },
+  update_focused_file = {
+    enable = false,
+    update_root = true,
+    ignore_list = {},
+  },
   diagnostics = {
     enable = true,
+    show_on_dirs = true,
     icons = {
       hint = "",
       info = "",
       warning = "",
       error = "",
     },
-  },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-    ignore_list = {},
   },
   git = {
     enable = true,
