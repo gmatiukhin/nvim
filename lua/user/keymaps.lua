@@ -19,10 +19,10 @@ vim.g.maplocalleader = " "
 
 -- Insert --
 -- Better navigation
-keymap("i", "<A-h>", "<Left>", opts)
-keymap("i", "<A-j>", "<Down>", opts)
-keymap("i", "<A-k>", "<Up>", opts)
-keymap("i", "<A-l>", "<Right>", opts)
+-- keymap("i", "<A-h>", "<Left>", opts)
+-- keymap("i", "<A-j>", "<Down>", opts)
+-- keymap("i", "<A-k>", "<Up>", opts)
+-- keymap("i", "<A-l>", "<Right>", opts)
 
 -- Normal --
 -- Better window navigation
@@ -31,14 +31,15 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Window splitting
 keymap("n", "<leader>h", "<cmd>split<CR>", opts)
 keymap("n", "<leader>v", "<cmd>vsplit<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -83,7 +84,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope find_files<cr>", opts)
 -- keymap("n", "<leader>ff", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<C-t>", ":Telescope live_grep<cr>", opts)
+keymap("n", "gp", ":Telescope live_grep<cr>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
