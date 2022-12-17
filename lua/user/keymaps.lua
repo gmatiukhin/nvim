@@ -32,7 +32,9 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Window splitting
+-- split line is horizontal, windows stacked on top of each other
 keymap("n", "<leader>h", "<cmd>split<CR>", opts)
+-- split line is vertical, windows stacked next to each other
 keymap("n", "<leader>v", "<cmd>vsplit<CR>", opts)
 
 -- Resize with arrows

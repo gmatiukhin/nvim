@@ -96,6 +96,9 @@ return packer.startup(function(use)
   -- LaTeX
   use("lervag/vimtex")
 
+  -- Nix
+  use("LnL7/vim-nix")
+
   -- Automatically set up config aufter cloning packer.nvim
   if PACKER_BOOTSTRAP then
     require("packer").sync()
