@@ -70,6 +70,9 @@ return packer.startup(function(use)
   -- Telescope
   use("nvim-telescope/telescope.nvim")
 
+  -- toggleterm
+  use("akinsho/toggleterm.nvim")
+
   -- Treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
