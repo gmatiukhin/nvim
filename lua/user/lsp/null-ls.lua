@@ -10,7 +10,7 @@ local diagnostics = null_ls.builtins.diagnostics
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
-  debug = true,
+  debug = false,
   sources = {
     formatting.stylua.with({
       extra_args = {
