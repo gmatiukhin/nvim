@@ -25,6 +25,7 @@ null_ls.setup({
     }),
     formatting.black,
     formatting.latexindent,
+    formatting.prettier,
     -- formatting.clang_format, -- if clangd is installed this will cause errors
     --
     -- diagnostics.flake8.with({
