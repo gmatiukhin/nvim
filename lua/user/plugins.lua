@@ -99,8 +99,9 @@ return packer.startup(function(use)
   -- LaTeX
   use("lervag/vimtex")
 
-  -- Nix
+  -- Specific configs
   use("LnL7/vim-nix")
+  use("fladson/vim-kitty")
 
   -- Automatically set up config aufter cloning packer.nvim
   if PACKER_BOOTSTRAP then

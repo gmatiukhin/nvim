@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 
-        local term_opts = { silent = true }
+local term_opts = { silent = true }
 
 local keymap = vim.api.nvim_set_keymap
 
@@ -11,8 +11,7 @@ vim.g.maplocalleader = " "
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
+--   visual_mode = "v", visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
 --
@@ -46,6 +45,9 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
+keymap("v", "<leader>fc", "zf", opts)
+keymap("n", "<leader>fd", "zd", opts)
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
