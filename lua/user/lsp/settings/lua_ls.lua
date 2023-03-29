@@ -1,4 +1,4 @@
--- Make sumneko_lua not flag `vim` as waring
+-- Make lua's LSP not flag `vim` as waring
 return {
   settings = {
     Lua = {
