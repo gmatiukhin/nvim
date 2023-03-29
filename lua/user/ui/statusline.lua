@@ -183,8 +183,8 @@ local lsp = {
       fg = "darkblue",
       bg = "red",
     },
-    left_sep = { str = " ", hl = { fg = "red" }, always_visible = true },
-    right_sep = { str = " ", hl = { fg = "yellow", bg = "red" }, always_visible = true },
+    left_sep = { str = " ", hl = { fg = "red" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "yellow", bg = "red" }, always_visible = true },
   },
   warnings = {
     provider = function()
@@ -194,7 +194,7 @@ local lsp = {
       fg = "darkblue",
       bg = "yellow",
     },
-    right_sep = { str = " ", hl = { fg = "aqua", bg = "yellow" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "aqua", bg = "yellow" }, always_visible = true },
   },
   hints = {
     provider = function()
@@ -204,7 +204,7 @@ local lsp = {
       fg = "darkblue",
       bg = "aqua",
     },
-    right_sep = { str = " ", hl = { fg = "orange", bg = "aqua" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "orange", bg = "aqua" }, always_visible = true },
   },
   info = {
     provider = function()
@@ -214,7 +214,7 @@ local lsp = {
       fg = "darkblue",
       bg = "orange",
     },
-    right_sep = { str = " ", hl = { fg = "darkblue", bg = "orange" }, always_visible = true },
+    right_sep = { str = " ", hl = { fg = "darkblue", bg = "orange" }, always_visible = true },
   },
   message = {
     provider = function()
@@ -227,9 +227,9 @@ local lsp = {
         return ""
       end
 
+      local title = Lsp.title or ""
       local msg = Lsp.message or ""
       local percentage = Lsp.percentage or 0
-      local title = Lsp.title or ""
       local spinners = { "", "" }
       local ms = vim.loop.hrtime() / 1000000
       local frame = math.floor(ms / 120) % #spinners
@@ -252,7 +252,7 @@ local lsp = {
 
 local file_type = {
   provider = function()
-    return string.format(" %s ", vim.bo.filetype:upper())
+    return string.format("  %s ", vim.bo.filetype:upper())
   end,
   hl = {
     fg = "white",
@@ -275,7 +275,7 @@ local position = {
       }
     end,
     left_sep = {
-      str = " ",
+      str = " ",
       hl = function()
         return {
           fg = require("feline.providers.vi_mode").get_mode_color(),
@@ -295,7 +295,7 @@ local position = {
       }
     end,
     left_sep = {
-      str = " ",
+      str = "",
       hl = function()
         return {
           fg = "darkblue",
