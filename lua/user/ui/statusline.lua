@@ -235,7 +235,7 @@ local lsp = {
       local frame = math.floor(ms / 120) % #spinners
 
       local content = ""
-      if vim.o.columns < 120 then
+      if vim.api.nvim_win_get_width(0) < 120 then
         content = string.format(" %%<%s", spinners[frame + 1])
       else
         content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
