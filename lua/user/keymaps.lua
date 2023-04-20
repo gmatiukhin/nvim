@@ -52,10 +52,6 @@ keymap("n", "<leader>fd", "zd", opts)
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
--- Insert --
--- Press `jj` fast to exit to normal mode
-keymap("i", "jj", "<ESC>", opts)
-
 -- Visual --
 -- Stay in indent mode when changing indentation of selected text
 keymap("v", "<", "<gv", opts)
