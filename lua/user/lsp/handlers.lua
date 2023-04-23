@@ -89,10 +89,6 @@ end
 
 -- Customize particular server
 M.on_attach = function(client, bufnr)
-  -- Here some custom capabilities could be specified
-  -- if client.name == "tsserver" then
-  --   client.server_capabilities.documentFormattingProvider = false
-  -- end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
   format_on_save(client, bufnr)

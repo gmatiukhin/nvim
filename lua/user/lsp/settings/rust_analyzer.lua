@@ -15,6 +15,7 @@ return {
         },
       },
       cargo = {
+        autoreload = true,
         buildScripts = {
           enable = true,
         },
