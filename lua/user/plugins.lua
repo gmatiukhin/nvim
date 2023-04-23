@@ -99,6 +99,16 @@ return packer.startup(function(use)
   -- LaTeX
   use("lervag/vimtex")
 
+  -- Markdown Preview
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  })
+
   -- Specific configs
   use("LnL7/vim-nix")
   use("fladson/vim-kitty")
