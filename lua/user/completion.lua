@@ -7,33 +7,41 @@ end
 -- Load vs-code style snippets from `rafamadriz/friengly-snippets`
 require("luasnip/loaders/from_vscode").lazy_load()
 
---   פּ ﯟ   some other good icons
 local kind_icons = {
-  Text = "",
-  Method = "m",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "",
-  Interface = "",
-  Module = "",
-  Property = "",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
+  Array = "",
+  Boolean = "",
+  Class = "",
+  Color = "",
+  Constant = "",
+  Constructor = "",
+  Enum = "",
+  EnumMember = "",
+  Event = "",
+  Field = "",
+  File = "",
+  Folder = "󰉋",
+  Function = "",
+  Interface = "",
+  Key = "",
+  Keyword = "",
+  Method = "",
+  Module = "",
+  Namespace = "",
+  Null = "󰟢",
+  Number = "",
+  Object = "",
+  Operator = "",
+  Package = "",
+  Property = "",
+  Reference = "",
+  Snippet = "",
+  String = "",
+  Struct = "",
+  Text = "",
+  TypeParameter = "",
+  Unit = "",
+  Value = "",
+  Variable = "",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -58,7 +66,6 @@ cmp.setup({
     -- Item selection
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
-
     -- Docs scroll
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -66,7 +73,6 @@ cmp.setup({
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
-
     -- Supertab-like mapping
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
