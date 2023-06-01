@@ -89,7 +89,6 @@ nvim_tree.setup({
   on_attach = on_attach,
   disable_netrw = true,
   hijack_netrw = true,
-  create_in_closed_folder = false,
   hijack_unnamed_buffer_when_opening = true,
   hijack_cursor = true,
   sync_root_with_cwd = false,
