@@ -106,8 +106,5 @@ keymap("n", "<leader>x", "<cmd>:Bdelete<CR>", opts)
 --   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
 
 -- Trouble
-keymap("n", "T", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts)
-keymap("n", "F", "<cmd>TroubleToggle todo<CR>", opts)
-
--- Markdown preview
-keymap("n", "mp", "<cmd>MarkdownPreview<CR>", opts)
+keymap("n", "TT", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts)
+keymap("n", "TD", "<cmd>TroubleToggle todo<CR>", opts)
