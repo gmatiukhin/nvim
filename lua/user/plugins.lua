@@ -112,17 +112,6 @@ return packer.startup(function(use)
   -- Specific configs
   use("LnL7/vim-nix")
   use("fladson/vim-kitty")
-  use({
-    "habamax/vim-godot",
-    config = function()
-      vim.cmd([[
-      augroup GodotScript
-          autocmd!
-          autocmd FileType gdscript setlocal tabstop=4 shiftwidth=4
-      augroup END
-      ]])
-    end,
-  })
 
   -- Automatically set up config aufter cloning packer.nvim
   if PACKER_BOOTSTRAP then
