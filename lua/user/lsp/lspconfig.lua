@@ -5,8 +5,7 @@ end
 
 local opts = {}
 
-local servers = { unpack(require("user.lsp.servers")) }
-table.insert(servers, "gdscript")
+local servers = require("user.lsp.servers")
 
 for _, server in pairs(servers) do
   opts = {
