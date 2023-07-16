@@ -6,6 +6,7 @@ M.open = function()
   local win = require("plenary.popup").create(currName, {
     title = "Rename",
     style = "minimal",
+    border = true,
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     relative = "cursor",
     borderhighlight = "RenamerBorder",
