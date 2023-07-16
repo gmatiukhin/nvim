@@ -4,7 +4,6 @@ return {
   "clangd",
   "pyright",
   "texlab",
-  "rnix",
   "html",
   "cssls",
   "jdtls",

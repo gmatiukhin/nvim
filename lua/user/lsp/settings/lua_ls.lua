@@ -1,3 +1,4 @@
+-- https://github.com/luals/lua-language-server/blob/master/locale/en-us/setting.lua
 -- Make lua's LSP not flag `vim` as waring
 return {
   settings = {

@@ -3,36 +3,27 @@ if not formatter_status_ok then
   return
 end
 
-formatter.setup {
+local util = require("formatter.util")
+
+formatter.setup({
   logging = false,
   log_level = vim.log.levels.DEBUG,
   filetype = {
-    lua = {
-      function()
-        return {
-          exe = "stylua",
-          args = {
-            "--indent-type",
-            "Spaces",
-            "--indent-width",
-            "2",
-          },
-          stdin = true,
-        }
-      end
-    },
+    -- Lua_ls already has formatting enabled
+    -- lua = { require("formatter.filetypes.lua").stylua },
     rust = { require("formatter.filetypes.rust").rustfmt },
     python = { require("formatter.filetypes.python").black },
     latex = { require("formatter.filetypes.latex").latexindent },
-    cpp = { require("formatter.filetypes.cpp").clangformat },
+    -- Do not use with if clangd
+    -- cpp = { require("formatter.filetypes.cpp").clangformat },
 
     -- Any filetype
     ["*"] = {
       require("formatter.defaults").prettier,
-      require("formatter.filetypes.any").remove_trailing_whitespace
-    }
-  }
-}
+      require("formatter.filetypes.any").remove_trailing_whitespace,
+    },
+  },
+})
 
 vim.api.nvim_exec(
   [[
@@ -41,5 +32,5 @@ vim.api.nvim_exec(
     autocmd BufWritePost * FormatWrite
     augroup END
   ]],
-  false
+  true
 )
