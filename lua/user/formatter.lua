@@ -16,12 +16,6 @@ formatter.setup({
     latex = { require("formatter.filetypes.latex").latexindent },
     -- Do not use with if clangd
     -- cpp = { require("formatter.filetypes.cpp").clangformat },
-
-    -- Any filetype
-    ["*"] = {
-      require("formatter.defaults").prettier,
-      require("formatter.filetypes.any").remove_trailing_whitespace,
-    },
   },
 })
 
