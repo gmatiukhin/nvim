@@ -7,4 +7,5 @@ return {
   "html",
   "cssls",
   "jdtls",
+  "bashls"
 }

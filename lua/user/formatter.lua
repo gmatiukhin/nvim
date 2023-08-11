@@ -14,6 +14,7 @@ formatter.setup({
     rust = { require("formatter.filetypes.rust").rustfmt },
     python = { require("formatter.filetypes.python").black },
     latex = { require("formatter.filetypes.latex").latexindent },
+    sh = { require("formatter.filetypes.sh").shfmt },
     -- Do not use with if clangd
     -- cpp = { require("formatter.filetypes.cpp").clangformat },
   },
