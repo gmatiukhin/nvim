@@ -63,15 +63,15 @@ return packer.startup(function(use)
     use("folke/todo-comments.nvim")
 
     -- cmp plugins
-    use("hrsh7th/nvim-cmp") -- The completion plugin
-    use("hrsh7th/cmp-buffer") -- buffer completions
-    use("hrsh7th/cmp-path") -- path completions
-    use("hrsh7th/cmp-cmdline") -- cmdline completions
+    use("hrsh7th/nvim-cmp")         -- The completion plugin
+    use("hrsh7th/cmp-buffer")       -- buffer completions
+    use("hrsh7th/cmp-path")         -- path completions
+    use("hrsh7th/cmp-cmdline")      -- cmdline completions
     use("saadparwaiz1/cmp_luasnip") -- snippet completions
     use("hrsh7th/cmp-nvim-lsp")
 
     -- snippets
-    use("L3MON4D3/LuaSnip") --snippet engine
+    use("L3MON4D3/LuaSnip")             --snippet engine
     use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
     -- Telescope
@@ -81,7 +81,7 @@ return packer.startup(function(use)
     use("akinsho/toggleterm.nvim")
 
     -- Treesitter
-    use( "nvim-treesitter/nvim-treesitter")
+    use("nvim-treesitter/nvim-treesitter")
     use("p00f/nvim-ts-rainbow")
     use("nvim-treesitter/playground")
 
@@ -108,6 +108,7 @@ return packer.startup(function(use)
 
     -- Specific configs
     use("fladson/vim-kitty")
+    use("gpanders/nvim-parinfer")
   end
 
   -- Automatically set up config aufter cloning packer.nvim
