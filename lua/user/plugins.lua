@@ -109,6 +109,7 @@ return packer.startup(function(use)
     -- Specific configs
     use("fladson/vim-kitty")
     use("gpanders/nvim-parinfer")
+    use("Fymyte/rasi.vim")
   end
 
   -- Automatically set up config aufter cloning packer.nvim
