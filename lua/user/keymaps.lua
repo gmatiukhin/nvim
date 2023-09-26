@@ -25,6 +25,10 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Beter visual lines navigation
+keymap("n", "k", "gk", opts)
+keymap("n", "j", "gj", opts)
+
 -- Window splitting
 -- split line is horizontal, windows stacked on top of each other
 keymap("n", "<leader>h", "<cmd>split<CR>", opts)
@@ -40,7 +44,6 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
