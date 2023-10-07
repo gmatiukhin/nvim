@@ -111,13 +111,13 @@ nvim_tree.setup({
   },
   view = {
     width = 30,
-    hide_root_folder = false,
     side = "left",
     adaptive_size = true,
     number = false,
     relativenumber = false,
   },
   renderer = {
+    root_folder_label = false,
     highlight_git = true,
     root_folder_modifier = ":t",
     icons = {
