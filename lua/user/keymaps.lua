@@ -62,6 +62,10 @@ keymap("v", "K", ":move '<-2<CR>gv-gv", opts)
 -- Make Neovim keep previously yanked value after pasting
 keymap("v", "p", '"_dP', opts)
 
+-- Beter visual lines navigation
+keymap("v", "k", "gk", opts)
+keymap("v", "j", "gj", opts)
+
 -- Visual Block --
 -- Move text up and down
 -- It looks like remappings from Visual mode also work in Visual Block mode
