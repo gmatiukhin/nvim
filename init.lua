@@ -35,4 +35,5 @@ if IsWorkstation then
   require("user.gitsigns")
   require("user.toggleterm")
   require("user.formatter")
+  require("user.vimtex")
 end
