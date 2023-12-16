@@ -22,8 +22,12 @@ configs.setup({
     enable = true,
     disable = { "python" },
   },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
 })
+
+local context_commentstring = require("ts_context_commentstring")
+context_commentstring.setup({
+  enable = true,
+  enable_autocmd = false,
+})
+
+vim.g.skip_ts_context_commentstring_module = true

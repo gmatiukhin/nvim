@@ -46,71 +46,70 @@ return packer.startup(function(use)
   use("numToStr/Comment.nvim")
   use("windwp/nvim-autopairs")
 
-  if IsWorkstation then
-    use("folke/which-key.nvim")
-    use("folke/tokyonight.nvim")
+  use("folke/which-key.nvim")
+  use("folke/tokyonight.nvim")
 
-    -- LSP
-    use("neovim/nvim-lspconfig")
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
+  -- LSP
+  use("neovim/nvim-lspconfig")
+  use("williamboman/mason.nvim")
+  use("williamboman/mason-lspconfig.nvim")
 
-    -- Formatting
-    use("mhartington/formatter.nvim")
+  -- Formatting
+  use("mhartington/formatter.nvim")
 
-    -- Diagnostic
-    use("folke/trouble.nvim")
-    use("folke/todo-comments.nvim")
+  -- Diagnostic
+  use("folke/trouble.nvim")
+  use("folke/todo-comments.nvim")
 
-    -- cmp plugins
-    use("hrsh7th/nvim-cmp")         -- The completion plugin
-    use("hrsh7th/cmp-buffer")       -- buffer completions
-    use("hrsh7th/cmp-path")         -- path completions
-    use("hrsh7th/cmp-cmdline")      -- cmdline completions
-    use("saadparwaiz1/cmp_luasnip") -- snippet completions
-    use("hrsh7th/cmp-nvim-lsp")
+  -- cmp plugins
+  use("hrsh7th/nvim-cmp")         -- The completion plugin
+  use("hrsh7th/cmp-buffer")       -- buffer completions
+  use("hrsh7th/cmp-path")         -- path completions
+  use("hrsh7th/cmp-cmdline")      -- cmdline completions
+  use("saadparwaiz1/cmp_luasnip") -- snippet completions
+  use("hrsh7th/cmp-nvim-lsp")
+  use("hrsh7th/cmp-nvim-lua")
 
-    -- snippets
-    use("L3MON4D3/LuaSnip")             --snippet engine
-    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+  -- snippets
+  use("L3MON4D3/LuaSnip")             --snippet engine
+  use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
-    -- Telescope
-    use("nvim-telescope/telescope.nvim")
+  -- Telescope
+  use("nvim-telescope/telescope.nvim")
 
-    -- toggleterm
-    use("akinsho/toggleterm.nvim")
+  -- toggleterm
+  use("akinsho/toggleterm.nvim")
 
-    -- Treesitter
-    use("nvim-treesitter/nvim-treesitter")
-    use("p00f/nvim-ts-rainbow")
-    use("nvim-treesitter/playground")
+  -- Treesitter
+  use("nvim-treesitter/nvim-treesitter")
+  use("p00f/nvim-ts-rainbow")
+  use("nvim-treesitter/playground")
 
 
-    use("lewis6991/gitsigns.nvim")
+  use("lewis6991/gitsigns.nvim")
 
-    use("nvim-tree/nvim-web-devicons")
+  use("nvim-tree/nvim-web-devicons")
 
-    -- Tabs, buffers, winbars and statusline
-    use("akinsho/bufferline.nvim")
-    use("moll/vim-bbye")
-    use("feline-nvim/feline.nvim")
+  -- Tabs, buffers, winbars and statusline
+  use("akinsho/bufferline.nvim")
+  use("moll/vim-bbye")
+  use("feline-nvim/feline.nvim")
 
-    -- LaTeX & Markdown
-    use("lervag/vimtex")
-    use({
-      "iamcco/markdown-preview.nvim",
-      run = "cd app && npm install",
-      setup = function()
-        vim.g.mkdp_filetypes = { "markdown" }
-      end,
-      ft = { "markdown" },
-    })
+  -- LaTeX & Markdown
+  use("lervag/vimtex")
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  })
 
-    -- Specific configs
-    use("fladson/vim-kitty")
-    use("gpanders/nvim-parinfer")
-    use("Fymyte/rasi.vim")
-  end
+  -- Specific configs
+  use("fladson/vim-kitty")
+  use("gpanders/nvim-parinfer")
+  use("Fymyte/rasi.vim")
 
   -- Automatically set up config aufter cloning packer.nvim
   if PACKER_BOOTSTRAP then
