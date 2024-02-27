@@ -111,6 +111,9 @@ return packer.startup(function(use)
   use("gpanders/nvim-parinfer")
   use("Fymyte/rasi.vim")
 
+  -- Misq
+  use("ivanesmantovich/xkbswitch.nvim")
+
   -- Automatically set up config aufter cloning packer.nvim
   if PACKER_BOOTSTRAP then
     require("packer").sync()
