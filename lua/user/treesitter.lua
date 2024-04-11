@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 configs.setup({
-  ensure_installed = { "vim", "rust", "cpp", "python" },
+  ensure_installed = { "vim", "rust", "cpp", "python", "yuck", "bash", "c", "commonlisp", "vimdoc" },
   sync_installed = false,
   ignore_install = { "" },
   highlight = {
