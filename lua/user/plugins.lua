@@ -55,7 +55,7 @@ return packer.startup(function(use)
   use("williamboman/mason-lspconfig.nvim")
 
   -- Formatting
-  use("mhartington/formatter.nvim")
+  use("stevearc/conform.nvim")
 
   -- Diagnostic
   use("folke/trouble.nvim")
