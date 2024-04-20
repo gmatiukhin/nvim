@@ -2,22 +2,36 @@ local status_ok, feline = pcall(require, "feline")
 if not status_ok then
   return
 end
--- "┃", "█", "", "", "", "", "", "", "●", ""
--- " "
 
-local one_monokai = {
-  fg = "#abb2bf",
-  bg = "#1e2024",
-  green = "#98c379",
-  yellow = "#e5c07b",
-  purple = "#c678dd",
-  orange = "#d19a66",
-  peanut = "#f6d5a4",
-  red = "#e06c75",
-  aqua = "#61afef",
-  darkblue = "#282c34",
-  dark_red = "#f75f5f",
-}
+local theme = function()
+  local status_ok, _tokyonight = pcall(require, "tokyonight.colors")
+  if not status_ok then
+    return "default"
+  end
+  local tokyonight = _tokyonight.setup()
+  return {
+    fg = tokyonight.fg,
+    bg = tokyonight.bg_dark,
+
+    git_add = tokyonight.git.add,
+    git_del = tokyonight.git.delete,
+    git_mod = tokyonight.git.change,
+
+    error = tokyonight.error,
+    warning = tokyonight.warning,
+    info = tokyonight.info,
+    hint = tokyonight.hint,
+
+    green = tokyonight.green,
+    yellow = tokyonight.yellow,
+    purple = tokyonight.purple,
+    orange = tokyonight.orange,
+    peanut = "#f6d5a4",
+    red = tokyonight.red,
+    blue = tokyonight.blue,
+    magenta = tokyonight.magenta,
+  }
+end
 
 local vi_mode_colors = {
   NORMAL = "green",
@@ -25,35 +39,41 @@ local vi_mode_colors = {
   INSERT = "yellow",
   VISUAL = "purple",
   LINES = "orange",
-  BLOCK = "dark_red",
-  REPLACE = "red",
-  COMMAND = "aqua",
+  BLOCK = "red",
+  REPLACE = "magenta",
+  COMMAND = "blue",
 }
+
+local mode_highlight = function()
+  return {
+    fg = "bg",
+    bg = require("feline.providers.vi_mode").get_mode_color(),
+  }
+end
+
+local rev_mode_highlight = function()
+  local hl = mode_highlight()
+  hl.fg, hl.bg = hl.bg, hl.fg
+  return hl
+end
 
 local vim_mode = {
   provider = {
     name = "vi_mode",
-    opts = {
-      show_mode_name = true,
-      -- padding = "center", -- Uncomment for extra padding.
-    },
+    show_mode_name = true,
+    padding = true, -- Uncomment for extra padding.
   },
   icon = "",
   hl = function()
-    return {
-      fg = "darkblue",
-      bg = require("feline.providers.vi_mode").get_mode_color(),
-      style = "bold",
-    }
+    local hl = mode_highlight()
+    hl["style"] = "bold"
+    return hl
   end,
   left_sep = "block",
   right_sep = function()
     return {
-      str = " ",
-      hl = {
-        fg = require("feline.providers.vi_mode").get_mode_color(),
-        bg = "darkblue",
-      },
+      str = "slant_right",
+      hl = rev_mode_highlight,
     }
   end,
 }
@@ -61,13 +81,7 @@ local vim_mode = {
 local fileinfo = {
   provider = {
     name = "file_info",
-    opts = {
-      type = "relative-short",
-    },
-  },
-  hl = {
-    fg = "white",
-    bg = "darkblue",
+    type = "relative-short",
   },
   left_sep = "block",
   right_sep = "block",
@@ -86,25 +100,25 @@ local git = {
   branch = {
     provider = function()
       local branch_name = get_git_data("head")
-      return (branch_name ~= "") and branch_name or "no branch"
+      return (branch_name ~= "") and branch_name or "none"
     end,
+    left_sep = {
+      str = "slant_right",
+      hl = {
+        fg = "bg",
+        bg = "peanut",
+      },
+    },
     hl = {
-      fg = "darkblue",
+      fg = "bg",
       bg = "peanut",
       style = "bold",
     },
-    left_sep = {
-      str = " ",
-      hl = {
-        fg = "peanut",
-        bg = "darkblue",
-      },
-    },
     right_sep = {
-      str = " ",
+      str = "slant_right",
       hl = {
         fg = "peanut",
-        bg = "aqua",
+        bg = "git_add",
       },
     },
     icon = " ",
@@ -114,14 +128,14 @@ local git = {
       return tostring(get_git_data("added"))
     end,
     hl = {
-      fg = "darkblue",
-      bg = "aqua",
+      fg = "bg",
+      bg = "git_add",
     },
     right_sep = {
-      str = " ",
+      str = "slant_right",
       hl = {
-        fg = "aqua",
-        bg = "red",
+        fg = "git_add",
+        bg = "git_del",
       },
       always_visible = true,
     },
@@ -131,14 +145,14 @@ local git = {
       return tostring(get_git_data("removed"))
     end,
     hl = {
-      fg = "darkblue",
-      bg = "red",
+      fg = "bg",
+      bg = "git_del",
     },
     right_sep = {
-      str = " ",
+      str = "slant_right",
       hl = {
-        fg = "red",
-        bg = "orange",
+        fg = "git_del",
+        bg = "git_mod",
       },
       always_visible = true,
     },
@@ -148,21 +162,17 @@ local git = {
       return tostring(get_git_data("changed"))
     end,
     hl = {
-      fg = "darkblue",
-      bg = "orange",
+      fg = "bg",
+      bg = "git_mod",
     },
     right_sep = {
-      str = " ",
+      str = "slant_right",
       hl = {
-        fg = "orange",
+        fg = "git_mod",
       },
       always_visible = true,
     },
   },
-  -- -- Limits blank space if there are no previous symbols
-  -- dummy = {
-  --   provider = "",
-  -- }
 }
 
 local get_lsp_diag = function(severity)
@@ -179,42 +189,33 @@ local lsp = {
     provider = function()
       return get_lsp_diag({ severity = vim.diagnostic.severity.ERROR })
     end,
-    hl = {
-      fg = "darkblue",
-      bg = "red",
-    },
-    left_sep = { str = " ", hl = { fg = "red" }, always_visible = true },
-    right_sep = { str = " ", hl = { fg = "yellow", bg = "red" }, always_visible = true },
+    left_sep = { str = "", hl = { fg = "error" }, always_visible = true },
+    hl = { fg = "bg", bg = "error", },
+    right_sep = { str = "", hl = { fg = "warning", bg = "error" }, always_visible = true },
   },
   warnings = {
     provider = function()
       return get_lsp_diag({ severity = vim.diagnostic.severity.WARN })
     end,
-    hl = {
-      fg = "darkblue",
-      bg = "yellow",
-    },
-    right_sep = { str = " ", hl = { fg = "aqua", bg = "yellow" }, always_visible = true },
-  },
-  hints = {
-    provider = function()
-      return get_lsp_diag({ severity = vim.diagnostic.severity.HINT })
-    end,
-    hl = {
-      fg = "darkblue",
-      bg = "aqua",
-    },
-    right_sep = { str = " ", hl = { fg = "orange", bg = "aqua" }, always_visible = true },
+    hl = { fg = "bg", bg = "warning", },
+    right_sep = { str = "", hl = { fg = "info", bg = "warning" }, always_visible = true },
   },
   info = {
     provider = function()
-      return get_lsp_diag({ severity = vim.diagnostic.severity.INFO })
+      local info = string.gsub(get_lsp_diag({ severity = vim.diagnostic.severity.INFO }), "%s+", "")
+      local hint = string.gsub(get_lsp_diag({ severity = vim.diagnostic.severity.HINT }), "%s+", "")
+      local sum = (tonumber(info) or 0) + (tonumber(hint) or 0)
+      if sum == 0 then return "" else return tostring(sum) end
     end,
-    hl = {
-      fg = "darkblue",
-      bg = "orange",
-    },
-    right_sep = { str = " ", hl = { fg = "darkblue", bg = "orange" }, always_visible = true },
+    hl = { fg = "bg", bg = "info", },
+    right_sep = { str = "", hl = { fg = "bg", bg = "info" }, always_visible = true },
+  },
+  hint = {
+    provider = function()
+      return get_lsp_diag({ severity = vim.diagnostic.severity.HINT })
+    end,
+    hl = { fg = "bg", bg = "hint", },
+    right_sep = { str = "", hl = { fg = "bg", bg = "hint" }, always_visible = true },
   },
   message = {
     provider = function()
@@ -244,65 +245,43 @@ local lsp = {
       return content or ""
     end,
     hl = {
-      fg = "red",
-      -- bg = "darkblue",
+      fg = "info",
     },
   },
 }
 
 local file_type = {
   provider = function()
-    return string.format("  %s ", vim.bo.filetype:upper())
+    return string.format(" %s ", vim.bo.filetype:upper())
   end,
-  hl = {
-    fg = "white",
-    bg = "darkblue",
-  },
 }
 
 local position = {
   position = {
     provider = {
       name = "position",
-      opts = {
-        format = " {line}:{col} ",
-      },
+      format = " {line}:{col} ",
     },
-    hl = function()
-      return {
-        fg = "darkblue",
-        bg = require("feline.providers.vi_mode").get_mode_color(),
-      }
-    end,
+    hl = mode_highlight,
     left_sep = {
-      str = " ",
-      hl = function()
-        return {
-          fg = require("feline.providers.vi_mode").get_mode_color(),
-          bg = "darkblue",
-        }
-      end,
+      str = "slant_left",
+      hl = rev_mode_highlight,
     },
   },
   line_percentage = {
-    provider = function()
-      return " " .. require("feline.providers.cursor").line_percentage() .. "  "
-    end,
-    hl = function()
-      return {
-        fg = "darkblue",
-        bg = require("feline.providers.vi_mode").get_mode_color(),
-      }
-    end,
-    left_sep = {
-      str = "",
-      hl = function()
-        return {
-          fg = "darkblue",
-          bg = require("feline.providers.vi_mode").get_mode_color(),
-        }
-      end,
+    provider = {
+      name = "line_percentage",
+      padding = true,
     },
+    hl = mode_highlight,
+    left_sep = {
+      str = "slant_left_thin",
+      hl = mode_highlight,
+    },
+    right_sep = {
+      str = "block",
+      hl = rev_mode_highlight,
+    }
   },
 }
 
@@ -322,8 +301,8 @@ local middle = {
 local right = {
   lsp.errors,
   lsp.warnings,
-  lsp.hints,
   lsp.info,
+  -- lsp.hint,
   file_type,
   position.position,
   position.line_percentage,
@@ -335,11 +314,15 @@ local components = {
     middle,
     right,
   },
-  inactive = {},
+  inactive = {
+    {
+      fileinfo
+    }
+  },
 }
 
 feline.setup({
   components = components,
-  theme = one_monokai,
   vi_mode_colors = vi_mode_colors,
 })
+feline.use_theme(theme())

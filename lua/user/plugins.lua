@@ -93,7 +93,7 @@ return packer.startup(function(use)
   -- Tabs, buffers, winbars and statusline
   use("akinsho/bufferline.nvim")
   use("moll/vim-bbye")
-  use("feline-nvim/feline.nvim")
+  use("freddiehaddad/feline.nvim")
 
   -- LaTeX & Markdown
   use("lervag/vimtex")
