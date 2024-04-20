@@ -82,7 +82,7 @@ return packer.startup(function(use)
 
   -- Treesitter
   use("nvim-treesitter/nvim-treesitter")
-  use("p00f/nvim-ts-rainbow")
+  use("HiPhish/rainbow-delimiters.nvim")
   use("nvim-treesitter/playground")
 
 
