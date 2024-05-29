@@ -223,7 +223,7 @@ local lsp = {
         return ""
       end
 
-      local Lsp = vim.lsp.util.get_progress_messages()[1]
+      local Lsp = vim.lsp.status()[1]
       if not Lsp then
         return ""
       end
