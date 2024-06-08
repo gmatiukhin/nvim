@@ -223,7 +223,7 @@ local lsp = {
         return ""
       end
 
-      local Lsp = vim.lsp.status()[1]
+      local Lsp = vim.lsp.status()
       if not Lsp then
         return ""
       end
