@@ -18,11 +18,11 @@ vim.api.nvim_exec(
 
 gitsigns.setup({
   signs = {
-    add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-    change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-    delete = { hl = "DiffDelete", text = "", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteNr" },
-    topdelete = { hl = "DiffDelete", text = "", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteNr" },
-    changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeNr" },
+    add = { text = "▎" },
+    change = { text = "▎" },
+    delete = { text = "" },
+    topdelete = { text = "" },
+    changedelete = { text = "~" },
   },
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
   numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
@@ -53,7 +53,7 @@ gitsigns.setup({
     row = 0,
     col = 1,
   },
-  yadm = {
-    enable = false,
-  },
+  -- yadm = {
+  --   enable = false,
+  -- },
 })
