@@ -9,6 +9,8 @@ if not mason_lspconfig_status_ok then
 end
 
 local servers = require("user.lsp.servers")
+local to_install = servers.mason
+local to_ignore = servers.external
 
 local settings = {
   ui = {
@@ -25,6 +27,6 @@ local settings = {
 
 mason.setup(settings)
 mason_lspconfig.setup({
-  ensure_installed = servers,
-  automatic_installation = true,
+  ensure_installed = to_install,
+  automatic_installation = to_ignore,
 })

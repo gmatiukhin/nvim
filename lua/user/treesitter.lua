@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 ts_configs.setup({
-  ensure_installed = { "vim", "rust", "cpp", "python", "yuck", "bash", "c", "commonlisp", "vimdoc", "lua" },
+  ensure_installed = { "vim", "rust", "cpp", "python", "yuck", "bash", "c", "commonlisp", "vimdoc", "lua", "haskell" },
   sync_installed = true,
   ignore_install = { "" },
   highlight = {
