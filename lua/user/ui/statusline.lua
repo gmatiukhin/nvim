@@ -223,26 +223,30 @@ local lsp = {
         return ""
       end
 
-      local Lsp = vim.lsp.status()
-      if not Lsp then
-        return ""
-      end
+      local msg = vim.lsp.status()
+      -- if not Lsp then
+      --   return ""
+      -- end
+      --
+      -- local title = Lsp.title or ""
+      -- local msg = Lsp.message or ""
+      -- local percentage = Lsp.percentage or 0
+      -- local spinners = { "", "" }
+      -- local ms = vim.loop.hrtime() / 1000000
+      -- local frame = math.floor(ms / 120) % #spinners
+      --
+      -- local content = ""
+      -- if vim.api.nvim_win_get_width(0) < 120 then
+      --   content = string.format(" %%<%s", spinners[frame + 1])
+      -- else
+      --   content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+      -- end
 
-      local title = Lsp.title or ""
-      local msg = Lsp.message or ""
-      local percentage = Lsp.percentage or 0
-      local spinners = { "", "" }
-      local ms = vim.loop.hrtime() / 1000000
-      local frame = math.floor(ms / 120) % #spinners
-
-      local content = ""
-      if vim.api.nvim_win_get_width(0) < 120 then
-        content = string.format(" %%<%s", spinners[frame + 1])
-      else
-        content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
-      end
-
-      return content or ""
+      -- msg = msg:gsub(":", "a")
+      -- msg = msg:gsub(" ", "b")
+      -- print(msg)
+      -- print()
+      return ""
     end,
     hl = {
       fg = "info",
