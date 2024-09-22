@@ -41,14 +41,12 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- Packer manages itself
 
   use("nvim-lua/plenary.nvim")
-  use("nvim-lua/popup.nvim")
+  use("folke/noice.nvim")
+  use("folke/tokyonight.nvim")
+
   use("nvim-tree/nvim-tree.lua")
-  use("JoosepAlviste/nvim-ts-context-commentstring")
   use("numToStr/Comment.nvim")
   use("windwp/nvim-autopairs")
-
-  use("folke/which-key.nvim")
-  use("folke/tokyonight.nvim")
 
   -- LSP
   use("neovim/nvim-lspconfig")
@@ -63,31 +61,16 @@ return packer.startup(function(use)
   use("folke/todo-comments.nvim")
 
   -- cmp plugins
-  use("hrsh7th/nvim-cmp")        -- The completion plugin
-  use("hrsh7th/cmp-buffer")      -- buffer completions
-  use("hrsh7th/cmp-path")        -- path completions
-  use("hrsh7th/cmp-cmdline")     -- cmdline completions
-  use("saadparwaiz1/cmp_luasnip") -- snippet completions
+  use("hrsh7th/nvim-cmp") -- The completion plugin
+  use("hrsh7th/cmp-path") -- path completions
   use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-nvim-lua")
-
-  -- snippets
-  use("L3MON4D3/LuaSnip")            --snippet engine
-  use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
-  -- Telescope
-  use("nvim-telescope/telescope.nvim")
-
-  -- toggleterm
-  use("akinsho/toggleterm.nvim")
 
   -- Treesitter
   use("nvim-treesitter/nvim-treesitter")
   use("HiPhish/rainbow-delimiters.nvim")
-  use("nvim-treesitter/playground")
+  use("JoosepAlviste/nvim-ts-context-commentstring")
 
   use("lewis6991/gitsigns.nvim")
-
   use("nvim-tree/nvim-web-devicons")
 
   -- Tabs, buffers, winbars and statusline
@@ -107,13 +90,15 @@ return packer.startup(function(use)
   })
 
   -- Specific configs
+  -- Kitty config
   use("fladson/vim-kitty")
+  -- Lisp parentheses balancer
   use("gpanders/nvim-parinfer")
-  use("Fymyte/rasi.vim")
 
   -- Keyboard stuff
-  -- use("ivanesmantovich/xkbswitch.nvim")
+  -- Switch to default fcitx input in normal mode
   use("keaising/im-select.nvim")
+  -- Todo: switch language to english in normal mode
 
   -- Automatically set up config aufter cloning packer.nvim
   if PACKER_BOOTSTRAP then
