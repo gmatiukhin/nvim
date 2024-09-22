@@ -1,12 +1,3 @@
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  print("Could not find luasnip")
-  return
-end
-
--- Load vs-code style snippets from `rafamadriz/friengly-snippets`
-require("luasnip/loaders/from_vscode").lazy_load()
-
 local kind_icons = {
   Array = "",
   Boolean = "",
@@ -51,17 +42,7 @@ if not cmp_status_ok then
   return
 end
 
-local has_words_before = function()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
-
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
   mapping = {
     -- Item selection
     ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -77,10 +58,6 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif has_words_before() then
-        fallback()
       else
         fallback()
       end
@@ -88,8 +65,6 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -97,9 +72,6 @@ cmp.setup({
   },
   sources = {
     { name = "nvim_lsp" },
-    { name = "nvim_lua" },
-    { name = "luasnip" },
-    { name = "buffer" },
     { name = "path" },
   },
   formatting = {
@@ -108,9 +80,6 @@ cmp.setup({
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
-        nvim_lua = "[Nvim]",
-        luasnip = "[Snip]",
-        buffer = "[Buf]",
         path = "[Path]",
       })[entry.source.name]
       return vim_item
