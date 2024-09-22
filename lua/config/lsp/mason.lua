@@ -8,7 +8,7 @@ if not mason_lspconfig_status_ok then
   return
 end
 
-local servers = require("user.lsp.servers")
+local servers = require("config.lsp.servers")
 local to_install = servers.mason
 local to_ignore = servers.external
 

@@ -4,8 +4,8 @@ if not lspconfig_status_ok then
 end
 
 local opts = {
-  on_attach = require("user.lsp.handlers").on_attach,
-  capabilities = require("user.lsp.handlers").capabilities,
+  on_attach = require("config.lsp.handlers").on_attach,
+  capabilities = require("config.lsp.handlers").capabilities,
 }
 
 local function configure_servers(servers)
@@ -13,7 +13,7 @@ local function configure_servers(servers)
     server = vim.split(server, "@")[1]
 
     -- Custom settings for some clients
-    local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
+    local require_ok, conf_opts = pcall(require, "config.lsp.settings." .. server)
     if require_ok then
       opts = vim.tbl_deep_extend("force", conf_opts, opts)
     end
@@ -22,7 +22,7 @@ local function configure_servers(servers)
   end
 end
 
-local servers = require("user.lsp.servers")
+local servers = require("config.lsp.servers")
 local mason = servers.mason
 local external = servers.external
 
