@@ -8,6 +8,7 @@ keymap("", "<Space>", "<Nop>", opts)
 keymap("", "q:", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -45,9 +46,6 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
--- Nvimtree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-
 -- Visual --
 -- Stay in indent mode when changing indentation of selected text
 keymap("v", "<", "<gv", opts)
@@ -83,22 +81,10 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
--- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<cr>", opts)
--- keymap("n", "<leader>ff", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader>gg", ":Telescope live_grep<cr>", opts)
-
--- Comment
-keymap("n", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
-keymap("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
-
 -- Gitsigns
 keymap("n", "<C-g>", "<cmd>Gitsigns preview_hunk<CR>", opts)
 -- keymap("n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", opts)
 -- keymap("n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", opts)
-
--- Buffers
-keymap("n", "<leader>x", "<cmd>:Bdelete<CR>", opts)
 
 -- vim.api.nvim_buf_set_keymap(0, "i", "<Esc>", "<cmd>stopinsert | q!<CR>", opts)
 -- vim.api.nvim_buf_set_keymap(0, "n", "<Esc>", "<cmd>stopinsert | q!<CR>", opts)
@@ -106,7 +92,3 @@ keymap("n", "<leader>x", "<cmd>:Bdelete<CR>", opts)
 --   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
 -- vim.api.nvim_buf_set_keymap(0, "n", "<CR>",
 --   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
-
--- Trouble
-keymap("n", "TT", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts)
-keymap("n", "TD", "<cmd>TroubleToggle todo<CR>", opts)
