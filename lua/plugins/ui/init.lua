@@ -4,4 +4,5 @@ return {
 	{ import = "plugins.ui.bufferline" },
 	{ import = "plugins.ui.gitsigns" },
 	{ import = "plugins.ui.noice" },
+	{ import = "plugins.ui.dressing" },
 }

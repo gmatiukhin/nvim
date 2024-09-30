@@ -1,6 +1,5 @@
 return {
 	{ "nvim-lua/plenary.nvim" },
-	{ "akinsho/bufferline.nvim" },
 	{
 		"mhinz/vim-sayonara",
 		keys = {

@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"folke/tokyonight.nvim",
 	},
+	event = "VeryLazy",
 	config = function()
 		local theme = function()
 			local tokyonight = require("tokyonight.colors").setup()
