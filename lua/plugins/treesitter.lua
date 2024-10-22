@@ -37,6 +37,7 @@ return {
 				"python",
 				"yuck",
 				"bash",
+				"fish",
 				"commonlisp",
 				"haskell",
 				"lhaskell",
