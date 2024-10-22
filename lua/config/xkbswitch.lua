@@ -2,8 +2,6 @@
 M = {
 	keyboard = "keychron-keychron-q1v1-keyboard",
 	events_swtich_to_default = {
-		"VimEnter",
-		"FocusGained",
 		"InsertLeave",
 	},
 
