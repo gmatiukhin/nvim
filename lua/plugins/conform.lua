@@ -3,10 +3,25 @@ local formatters_by_ft = {
 	python = { "black" },
 	rust = { "yew-fmt", "rustfmt", stop_after_first = true },
 	bash = { "shfmt" },
-	yaml = { "yamlfmt" },
 	haskell = { "ormolu" },
 	-- cpp = { "clang-format" }
 }
+
+-- files formatted by prettier
+local prettier = {
+	"javascript",
+	"html",
+	"typescript",
+	"css",
+	"scss",
+	"markdown",
+	"yaml",
+	"json",
+}
+
+for _, v in pairs(prettier) do
+	formatters_by_ft[v] = { "prettier", stop_after_first = true }
+end
 
 local ft = {}
 local n = 0
@@ -25,5 +40,15 @@ return {
 			timeout_ms = 500,
 			lsp_format = "fallback",
 		},
+	},
+	setup = function()
+		require("conform").formatters.prettier = {
+			prepend_args = function(self, ctx)
+				return { "--no-color" }
+			end,
+		}
+	end,
+	default_format_opts = {
+		lsp_format = "fallback",
 	},
 }
