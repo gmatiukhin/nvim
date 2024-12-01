@@ -1,3 +1,10 @@
+-- Unset these so that they don't get in the way
+-- of keymaps for this plugin
+vim.keymap.del({ "n", "v" }, "gra")
+vim.keymap.del("n", "gri")
+vim.keymap.del("n", "grr")
+vim.keymap.del("n", "grn")
+
 return {
 	"folke/trouble.nvim",
 	keys = {
