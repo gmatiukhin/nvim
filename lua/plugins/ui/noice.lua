@@ -6,6 +6,14 @@ return {
 	},
 	event = "VeryLazy",
 	opts = {
+		views = {
+			mini = {
+				position = {
+					-- have messages appear above Feline
+					row = -vim.o.cmdheight - 1,
+				},
+			},
+		},
 		notify = {
 			view = "mini",
 		},

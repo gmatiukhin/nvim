@@ -19,8 +19,14 @@ vim.o.showmode = false
 vim.o.backup = false
 vim.o.writebackup = false
 
+-- global statusline at the very bottom
+vim.o.laststatus = 3
+-- setting this to 0 causes the bar to flicker with messages written there
+-- can't be bothered to reroute all of them, so this is fine
+vim.o.cmdheight = 1
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- vim.cmd("let g:python3_host_prog = '/usr/bin/python3'")
-vim.cmd("set whichwrap+=<,>,[,],h,l")
+-- vim.g.python3_host_prog = '/usr/bin/python3'
+vim.o.whichwrap = vim.o.whichwrap .. "<,>,[,],h,l"

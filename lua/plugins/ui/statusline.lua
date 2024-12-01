@@ -314,17 +314,15 @@ return {
 			position.line_percentage,
 		}
 
+		local common = {
+			left,
+			-- middle,
+			right,
+		}
+
 		local components = {
-			active = {
-				left,
-				middle,
-				right,
-			},
-			inactive = {
-				{
-					fileinfo,
-				},
-			},
+			active = common,
+			inactive = common,
 		}
 
 		local feline = require("feline")
@@ -332,7 +330,7 @@ return {
 			components = components,
 			vi_mode_colors = vi_mode_colors,
 		})
+		feline.winbar.setup()
 		feline.use_theme(theme())
-		-- feline.winbar.setup()
 	end,
 }
