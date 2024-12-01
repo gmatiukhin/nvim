@@ -20,7 +20,7 @@ local prettier = {
 }
 
 for _, v in pairs(prettier) do
-	formatters_by_ft[v] = { "prettier", stop_after_first = true }
+	formatters_by_ft[v] = { "prettier" }
 end
 
 local ft = {}
