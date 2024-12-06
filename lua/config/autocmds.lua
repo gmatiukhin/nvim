@@ -1,3 +1,7 @@
+if os.getenv("HYPRLAND_INSTANCE_SIGNATURE") == nil then
+	return
+end
+
 local xkbswitch = require("config.xkbswitch")
 
 local kbswitch = vim.api.nvim_create_augroup("kbswitch", { clear = true })
