@@ -45,6 +45,7 @@ return {
 				"html",
 				"css",
 				"hyprlang",
+				"wgsl",
 			},
 			sync_installed = true,
 			incremental_selection = {
