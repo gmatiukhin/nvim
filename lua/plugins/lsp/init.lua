@@ -15,6 +15,7 @@ return {
 					log_level = vim.log.levels.INFO,
 					max_concurrent_installers = 10,
 				},
+				build = ":MasonUpdate",
 				run = ":MasonUpdate",
 			},
 			"williamboman/mason-lspconfig.nvim",
@@ -36,9 +37,6 @@ return {
 				"jdtls",
 				"bashls",
 				"hls",
-			},
-			formatters = {
-				"black",
 			},
 			diagnositcs_config = {
 				virtual_text = false,
@@ -65,13 +63,8 @@ return {
 		},
 		config = function(_, opts)
 			local mason_lspconfig = require("mason-lspconfig")
-			local ensure_installed = opts.servers
-			for k, v in pairs(opts.formatters) do
-				ensure_installed[k] = v
-			end
-
 			mason_lspconfig.setup({
-				ensure_installed = ensure_installed,
+				ensure_installed = opts.servers,
 			})
 
 			-- Customize particular server
