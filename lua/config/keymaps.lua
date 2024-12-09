@@ -88,3 +88,11 @@ keymap("n", "<C-g>", "<cmd>Gitsigns preview_hunk<CR>", opts)
 --   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
 -- vim.api.nvim_buf_set_keymap(0, "n", "<CR>",
 --   "<cmd>stopinsert | lua vim.lsp.buf.rename.apply('" .. currName .. "'," .. win .. ")<CR>", opts)
+
+-- Unset these so that they don't get in the way
+-- of keymaps for Trouble plugin
+vim.api.nvim_del_keymap("n", "gra")
+vim.api.nvim_del_keymap("v", "gra")
+vim.api.nvim_del_keymap("n", "gri")
+vim.api.nvim_del_keymap("n", "grr")
+vim.api.nvim_del_keymap("n", "grn")

@@ -103,11 +103,11 @@ return {
 					filter = { event = "msg_showmode" },
 				},
 			},
-			-- Hide this warning https://github.com/neovim/neovim/pull/30313#issuecomment-2349327458
+			-- Hide this warning https://github.com/folke/trouble.nvim/issues/606
 			{
 				filter = {
 					warning = true,
-					find = "vim.treesitter.get_parser",
+					find = "vim.lsp.util.make_position_params()",
 				},
 				opts = { skip = true },
 			},
