@@ -8,7 +8,6 @@ return {
 		{ "tt", "<cmd>Trouble todo toggle<cr>", noremap = true, silent = true },
 		{ "td", "<cmd>Trouble diagnostics toggle<cr>", noremap = true, silent = true },
 	},
-	events = "VeryLazy",
 	dependencies = {
 		"folke/todo-comments.nvim",
 	},
@@ -54,9 +53,9 @@ return {
 		signs = {
 			-- icons / text used for a diagnostic
 			error = "",
-			warning = "",
-			hint = "",
-			information = "",
+			warning = "",
+			hint = "",
+			information = "",
 			other = "",
 		},
 		use_diagnostic_signs = true, -- enabling this will use the signs defined in your lsp client
