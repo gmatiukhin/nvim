@@ -32,23 +32,37 @@ for k, _ in pairs(formatters_by_ft) do
 end
 
 return {
-	"stevearc/conform.nvim",
-	ft = ft,
-	opts = {
-		formatters_by_ft = formatters_by_ft,
-		format_on_save = {
-			timeout_ms = 500,
+	{
+		"stevearc/conform.nvim",
+		ft = ft,
+		opts = {
+			formatters_by_ft = formatters_by_ft,
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_format = "fallback",
+			},
+		},
+		setup = function()
+			require("conform").formatters.prettier = {
+				prepend_args = function(_, _)
+					return { "--no-color" }
+				end,
+			}
+		end,
+		default_format_opts = {
 			lsp_format = "fallback",
 		},
 	},
-	setup = function()
-		require("conform").formatters.prettier = {
-			prepend_args = function(self, ctx)
-				return { "--no-color" }
-			end,
-		}
-	end,
-	default_format_opts = {
-		lsp_format = "fallback",
+	{
+		"zapling/mason-conform.nvim",
+		event = "BufReadPost",
+		opts = {
+			automatic_installation = true,
+			ignore_install = {
+				-- installed with cargo
+				"rustfmt",
+				"yew-fmt",
+			},
+		},
 	},
 }
