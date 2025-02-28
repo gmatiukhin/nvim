@@ -1,6 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
+		"nvim-tree/nvim-web-devicons",
 		"cameronr/lualine-pretty-path",
 	},
 	event = "VeryLazy",
@@ -44,12 +45,11 @@ return {
 					end
 				end,
 				component_separators = { left = "╲", right = "╱" },
-				disabled_filetypes = { "alpha", "neo-tree", "snacks_dashboard" },
+				disabled_filetypes = { "NvimTree" },
 				section_separators = { left = "", right = "" },
 				ignore_focus = { "trouble" },
 				globalstatus = true,
 			},
-			disabled_filetypes = { "NVimTree" },
 			sections = {
 				lualine_a = {
 					{
@@ -66,14 +66,10 @@ return {
 				},
 				lualine_c = {
 					{
-						"filename",
-						-- Filename and parent dir
-						path = 4,
-						symbols = {
-							modified = "",
-							readonly = "",
+						"pretty_path",
+						directories = {
+							shorten = false,
 						},
-						separator = "",
 					},
 					{
 						"diff",
@@ -106,7 +102,6 @@ return {
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
-						-- color = { fg = '#3d59a1' },
 						fmt = trunc(0, 0, 160, true), -- hide when window is < 100 columns
 						separator = "",
 					},
@@ -127,13 +122,6 @@ return {
 				},
 				lualine_z = {
 					{ "location", fmt = trunc(0, 0, 80, true) },
-				},
-			},
-			inactive_sections = {
-				lualine_c = {
-					{
-						"filename",
-					},
 				},
 			},
 			extensions = {
