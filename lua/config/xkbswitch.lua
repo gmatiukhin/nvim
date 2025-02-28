@@ -13,7 +13,7 @@ M = {
   keyboards = {
     ["keychron-keychron-q1v1-keyboard"] = true,
     ["at-translated-set-2-keyboard"] = true,
-  }
+  },
 }
 
 local layouts
