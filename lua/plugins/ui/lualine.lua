@@ -70,6 +70,7 @@ return {
             directories = {
               shorten = false,
             },
+            separator = "",
           },
           {
             "diff",
