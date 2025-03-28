@@ -31,12 +31,10 @@ return {
         "clangd",
         "pyright",
         "texlab",
-        "hls",
         "html",
         "cssls",
         "jdtls",
         "bashls",
-        "hls",
       },
       diagnositcs_config = {
         virtual_text = false,
