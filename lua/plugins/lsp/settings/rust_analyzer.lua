@@ -18,6 +18,9 @@ return {
       procMacro = {
         enable = true,
       },
+      diagnostics = {
+        disabled = { "macro-error" },
+      },
     },
   },
 }
