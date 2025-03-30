@@ -1,5 +1,8 @@
 return {
   "lewis6991/gitsigns.nvim",
+  keys = {
+    { "F", "<cmd>Gitsigns preview_hunk<CR>", noremap = true, silent = true },
+  },
   event = "VeryLazy",
   opts = function()
     -- Disable background highlight for Triangles

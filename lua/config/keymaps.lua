@@ -77,11 +77,6 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
--- Gitsigns
-keymap("n", "<C-g>", "<cmd>Gitsigns preview_hunk<CR>", opts)
--- keymap("n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", opts)
--- keymap("n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", opts)
-
 -- vim.api.nvim_buf_set_keymap(0, "i", "<Esc>", "<cmd>stopinsert | q!<CR>", opts)
 -- vim.api.nvim_buf_set_keymap(0, "n", "<Esc>", "<cmd>stopinsert | q!<CR>", opts)
 -- vim.api.nvim_buf_set_keymap(0, "i", "<CR>",
