@@ -30,3 +30,5 @@ vim.g.loaded_netrwPlugin = 1
 
 -- vim.g.python3_host_prog = '/usr/bin/python3'
 vim.o.whichwrap = vim.o.whichwrap .. "<,>,[,],h,l"
+
+vim.o.winborder = "rounded"
