@@ -4,6 +4,8 @@ local formatters_by_ft = {
   rust = { "yew-fmt", "rustfmt", stop_after_first = true },
   bash = { "shfmt" },
   haskell = { "ormolu" },
+  terraform = { "terraform_fmt" },
+  ansible = { "ansible-lint" },
   -- cpp = { "clang-format" }
 }
 
