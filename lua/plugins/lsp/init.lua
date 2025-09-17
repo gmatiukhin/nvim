@@ -89,7 +89,6 @@ return {
       }
 
       -- Custom settings for some servers
-      local lspconfig = require("lspconfig")
       for _, server in ipairs(opts.servers) do
         local require_ok, server_conf = pcall(require, "plugins.lsp.settings." .. server)
         local extra = {}
@@ -98,7 +97,7 @@ return {
         end
         local conf = vim.tbl_deep_extend("force", base_conf, extra)
 
-        lspconfig[server].setup(conf)
+        vim.lsp.config(server, conf)
       end
     end,
   },
