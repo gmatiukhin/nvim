@@ -64,6 +64,9 @@ return {
         -- installed with cargo
         "rustfmt",
         "yew-fmt",
+        -- installed with package manager
+        -- and is not subject to IP restrictions
+        "terraform_fmt",
       },
     },
   },
