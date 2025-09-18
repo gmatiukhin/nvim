@@ -46,6 +46,7 @@ return {
         "css",
         "hyprlang",
         "wgsl",
+        "go",
       },
       sync_installed = true,
       incremental_selection = {

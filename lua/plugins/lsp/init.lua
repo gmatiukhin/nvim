@@ -19,6 +19,7 @@ return {
         "cssls",
         "jdtls",
         "bashls",
+        "gopls",
       },
       diagnositcs_config = {
         virtual_text = false,
