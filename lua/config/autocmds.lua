@@ -28,3 +28,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*/kitty/*.session",
   group = kitty_detect,
 })
+
+local jinja_detect = vim.api.nvim_create_augroup("jinja-detect", { clear = true })
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  callback = function()
+    vim.bo.filetype = "jinja"
+  end,
+  pattern = "*.j2",
+  group = jinja_detect,
+})

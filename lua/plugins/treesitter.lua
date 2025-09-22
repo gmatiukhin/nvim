@@ -47,6 +47,7 @@ return {
         "hyprlang",
         "wgsl",
         "go",
+        "jinja",
       },
       sync_installed = true,
       incremental_selection = {
