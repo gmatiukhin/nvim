@@ -5,7 +5,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
     -- lazy = false,
     opts = {
       -- servers to configure and install

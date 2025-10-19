@@ -57,7 +57,7 @@ return {
   },
   {
     "zapling/mason-conform.nvim",
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       automatic_installation = true,
       ignore_install = {
