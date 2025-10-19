@@ -3,7 +3,7 @@ local formatters_by_ft = {
   python = { "black" },
   rust = { "yew-fmt", "rustfmt", stop_after_first = true },
   bash = { "shfmt" },
-  haskell = { "ormolu" },
+  -- haskell = { "ormolu" },
   terraform = { "terraform_fmt" },
   ansible = { "ansible-lint" },
   -- cpp = { "clang-format" }
