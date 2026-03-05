@@ -37,3 +37,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.j2",
   group = jinja_detect,
 })
+
+local terraform_detect = vim.api.nvim_create_augroup("terraform-detect", { clear = true })
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  callback = function()
+    vim.bo.filetype = "terraform"
+  end,
+  pattern = { "*.tf", "*.tf.json", "*.tfvars", "*.tfvars.json" },
+  group = terraform_detect,
+})
