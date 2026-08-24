@@ -5,6 +5,7 @@ local formatters_by_ft = {
   bash = { "shfmt" },
   -- haskell = { "ormolu" },
   terraform = { "terraform_fmt" },
+  hcl = { "terraform_fmt" },
   ansible = { "ansible-lint" },
   -- cpp = { "clang-format" }
 }
