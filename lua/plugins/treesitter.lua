@@ -1,25 +1,43 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     version = false,
-    -- lazy = vim.fn.argc(-1) == 0, -- load early when opening file from cmd
     event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+    cmd = { "TSUpdate", "TSInstall" },
     keys = {
       { "<CR>", desc = "Increment Selection", noremap = true, silent = true },
       { "<TAB>", desc = "Increment Selection", mode = "x", noremap = true, silent = true },
       { "<BS>", desc = "Decrement Selection", mode = "x", noremap = true, silent = true },
     },
-    main = "nvim-treesitter.configs",
-    init = function(plugin)
-      -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-      -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-      -- no longer trigger the **nvim-treesitter** module to be loaded in time.
-      -- Luckily, the only things that those plugins need are the custom queries, which we make available
-      -- during startup.
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
+    -- On the main branch, nvim-treesitter only installs parsers.
+    -- It does not turn on highlight, indent, or folding by itself.
+    init = function()
+      -- Add the parser for a language not in the main list.
+      -- This runs on the User TSUpdate event, as the docs say to do.
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          local parsers = require("nvim-treesitter.parsers")
+          parsers.lhaskell = {
+            install_info = {
+              url = "https://github.com/gmatiukhin/hacky-tree-sitter-lhaskell",
+              branch = "main",
+              files = { "src/parser.c" },
+            },
+            filetype = "lhaskell",
+          }
+          parsers.kittyconf = {
+            install_info = {
+              url = "https://github.com/gmatiukhin/tree-sitter-kitty-conf",
+              branch = "main",
+              files = { "src/parser.c" },
+            },
+            filetype = "kittyconf",
+          }
+        end,
+      })
     end,
     opts = {
       ensure_installed = {
@@ -49,38 +67,34 @@ return {
         "go",
         "jinja",
       },
-      sync_installed = true,
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<CR>",
-          scope_incremental = "<TAB>",
-          node_decremental = "<BS>",
-        },
-      },
-      highlight = { enable = true },
-      indent = { enable = true },
     },
-    config = function(opts)
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.lhaskell = {
-        install_info = {
-          url = "https://github.com/gmatiukhin/hacky-tree-sitter-lhaskell",
-          branch = "main",
-          files = { "src/parser.c" },
-        },
-        filetype = "lhaskell",
-      }
-      parser_config.kittyconf = {
-        install_info = {
-          url = "https://github.com/gmatiukhin/tree-sitter-kitty-conf",
-          branch = "main",
-          files = { "src/parser.c" },
-        },
-        filetype = "kittyconf",
-      }
-      require("nvim-treesitter.configs").setup(opts.opts)
+    config = function(_, opts)
+      require("nvim-treesitter").setup({})
+      require("nvim-treesitter").install(opts.ensure_installed)
+
+      -- Turn on highlight, indent, and incremental selection per file type.
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          local lang = vim.treesitter.language.get_lang(args.match)
+          if not lang then
+            return
+          end
+          local add_ok = pcall(vim.treesitter.language.add, lang)
+          if not add_ok then
+            return
+          end
+
+          -- vim.treesitter.language.add can return true with no real
+          -- parser file backing it (e.g. plugin popup filetypes like
+          -- "noice"). Guard the actual start call too, or it throws.
+          local start_ok = pcall(vim.treesitter.start, args.buf, lang)
+          if not start_ok then
+            return
+          end
+
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
     end,
   },
   -- Show context like function names or loops and conditions
@@ -88,7 +102,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependency = {
-      "nvim-tresitter/nvim-treesitter",
+      "nvim-treesitter/nvim-treesitter",
     },
     event = "VeryLazy",
     opts = {
